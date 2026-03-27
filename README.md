@@ -1,6 +1,6 @@
 # 🧮 Math Game
 
-A simple console-based mathematical game built with **C#** and **.NET 8**.
+A simple console-based mathematical game built with **C#** and **.NET 10**.
 
 ---
 
@@ -18,7 +18,7 @@ A simple console-based mathematical game built with **C#** and **.NET 8**.
 | Technology | Description |
 | :--- | :--- |
 | **Language** | C# |
-| **Framework** | .NET 8 |
+| **Framework** | .NET 10 |
 | **Type** | Console Application |
 
 ---
