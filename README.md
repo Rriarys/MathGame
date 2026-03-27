@@ -36,9 +36,13 @@ A simple console-based mathematical game built with **C#** and **.NET 10**.
 
 1.  **Clone** the repository:
     ```bash
-    git clone [your-repository-link]
+    git clone https://github.com/Rriarys/MathGame.git
     ```
-2.  **Navigate** to the project folder and run:
+2.  **Navigate** to the project folder:
+    ```bash
+    cd MathGame/MathGame
+    ```
+3.  **Run**:
     ```bash
     dotnet run
     ```
