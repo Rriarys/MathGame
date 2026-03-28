@@ -19,17 +19,19 @@ const string menuText = @"
 3. Multiplication
 4. Division
 5. Random operations
-8. Change player
+8. Change player session
 9. Story of games
 0. Exit";
 
 // Custom methods for typewriting effect
 void TypeWrite(string text, int delay = 15)
-{
+{   
     foreach (char c in text)
     {
+        Console.CursorVisible = false;
         Console.Write(c);
         Thread.Sleep(delay);
+        Console.CursorVisible = true;
     }
 }
 
@@ -42,14 +44,31 @@ void TypeWriteLine(string text, int delay = 15)
 
 // Spinner animation method to show a loading effect
 void StoryShowLoadingAnimation()
-{
+{   
+    Console.WriteLine();
+    Console.CursorVisible = false;
     string[] spinner = { "|", "/", "-", "\\" };
     for (int i = 0; i < 40; i++)
     {
         Console.Write($"\rLoading story of games... {spinner[i % spinner.Length]}");
+        Thread.Sleep(150);
+    }
+    TypeWriteLine("\rDone!".PadRight(30));
+    Console.CursorVisible = true;
+}
+
+void PlayerNameChangingLoadingAnimation()
+{   
+    Console.WriteLine();
+    Console.CursorVisible = false;
+    string[] spinner = { "|", "/", "-", "\\" };
+    for (int i = 0; i < 40; i++)
+    {   
+        Console.Write($"\rChanging player session... {spinner[i % spinner.Length]}");
         Thread.Sleep(100);
     }
-    TypeWriteLine("\rDone!       ");
+    TypeWriteLine("\rDone!".PadRight(30));
+    Console.CursorVisible = true;
 }
 
 // Method to wrap text to a given width
@@ -125,16 +144,11 @@ while (true)
     // =============================== GOTO ===============================
     ChangePlayer:; // Label for changing player, used with goto statement
 
-    TypeWrite("\n\nPlease enter your name: ");
+    TypeWrite("\nPlease enter your name: ");
     string playerName = Console.ReadLine() ?? "Player"; // If the user doesn't enter a name, default to "Player"
 
-    Console.ForegroundColor = ConsoleColor.DarkCyan;
-    TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!");
-    Console.ResetColor();
-
-    // =============================== SEPARATOR ===============================
-    Console.ForegroundColor = ConsoleColor.DarkGray;
-    Console.WriteLine(new string('=', Console.WindowWidth));
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!\n");
     Console.ResetColor();
 
     // =============================== GAME INSTANCE ===============================
@@ -142,6 +156,11 @@ while (true)
     
     while (true)
     {   
+        // =============================== SEPARATOR ===============================
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(new string('=', Console.WindowWidth));
+        Console.ResetColor();
+
         // =============================== MENU DISPLAY ===============================
         Console.ForegroundColor = ConsoleColor.Magenta;
         TypeWriteLine("\nChoose operation for challenge by entering the corresponding number:\n");
@@ -183,7 +202,7 @@ while (true)
         Console.ResetColor();
 
         // =============================== CHOICE OPERATION ===============================
-        TypeWrite("\nEnter your choice: ");
+        TypeWrite("\n\nEnter your choice: ");
         string? playerChoice = Console.ReadLine();
         Console.WriteLine();
 
@@ -230,17 +249,16 @@ while (true)
                 Console.WriteLine(new string('=', Console.WindowWidth));
                 Console.ResetColor();
 
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                TypeWrite("\nChanging player...\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                PlayerNameChangingLoadingAnimation();
                 Console.ResetColor();
-                Thread.Sleep(1500);
                 goto ChangePlayer; // Use goto to break out of the inner loop and prompt for a new player name
             case "9":
                 // =============================== SEPARATOR ===============================
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine(new string('=', Console.WindowWidth));
                 Console.ResetColor();
-                
+
                 Console.ForegroundColor = ConsoleColor.Green;
                 StoryShowLoadingAnimation();
                 Console.ResetColor();
