@@ -136,13 +136,13 @@ while (true)
 
     Console.WriteLine();
 
+    // =============================== GOTO ===============================
+    ChangePlayer:; // Label for changing player, used with goto statement
+
     // =============================== SEPARATOR ===============================
     Console.ForegroundColor = ConsoleColor.DarkGray;
     Console.WriteLine(new string('=', Console.WindowWidth));
     Console.ResetColor();
-
-    // =============================== GOTO ===============================
-    ChangePlayer:; // Label for changing player, used with goto statement
 
     TypeWrite("\nPlease enter your name: ");
     string playerName = Console.ReadLine() ?? "Player"; // If the user doesn't enter a name, default to "Player"
@@ -202,6 +202,7 @@ while (true)
         Console.ResetColor();
 
         // =============================== CHOICE OPERATION ===============================
+        ChooseOnceNore:; // If the user enters an invalid choice, this label allows us to prompt them again without restarting the entire game loop
         TypeWrite("\n\nEnter your choice: ");
         string? playerChoice = Console.ReadLine();
         Console.WriteLine();
@@ -272,7 +273,7 @@ while (true)
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 TypeWriteLine("Invalid choice. Please enter a valid number.");
                 Console.ResetColor();
-                continue; // Prompt the user again if the input is invalid
+                goto ChooseOnceNore; // Prompt the user again if the input is invalid
         }
     }
 }
