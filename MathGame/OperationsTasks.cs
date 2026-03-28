@@ -9,7 +9,7 @@ public class OperationsTasks
 
         Console.WriteLine
         (
-        @"Welcome to the Addition Game!
+        @"      Welcome to the Addition Game!
         In this game, you will be given two numbers, and you need to calculate their sum.
         Let's get started!"
         );
@@ -19,7 +19,7 @@ public class OperationsTasks
             int number1 = random.Next(1, 101);
             int number2 = random.Next(1, 101);
 
-            Console.WriteLine($"\nWhat is {number1} + {number2}?"); // Prompt the user with the addition question
+            Console.WriteLine($"\nWhat is: {number1} + {number2}?"); // Prompt the user with the addition question
             int correctAnswer = number1 + number2; // Game calculates the correct answer
             int userAnswer;
             while (true)
@@ -44,7 +44,7 @@ public class OperationsTasks
                     Console.WriteLine($"Incorrect. The correct answer is {correctAnswer}.");
                 }
         }
-        Console.WriteLine($"\nGame Over! Your final score is: {score}/5");
+        Console.WriteLine($"\nGame Over! Your final score is: {score}/5\n");
     }
 
     public void StartSubtractionGame()
@@ -55,7 +55,7 @@ public class OperationsTasks
 
         Console.WriteLine
         (
-        @"Welcome to the Subtraction Game!
+        @"  Welcome to the Subtraction Game!
         In this game, you will be given two numbers, and you need to calculate their difference.
         Let's get started!"
         );
@@ -65,7 +65,7 @@ public class OperationsTasks
             int number1 = random.Next(1, 101);
             int number2 = random.Next(1, 101);
 
-            Console.WriteLine($"\nWhat is {number1} - {number2}?"); // Prompt the user with the subtraction question
+            Console.WriteLine($"\nWhat is: {number1} - {number2}?"); // Prompt the user with the subtraction question
             int correctAnswer = number1 - number2; // Game calculates the correct answer
             int userAnswer;
             while (true)
@@ -90,7 +90,7 @@ public class OperationsTasks
                     Console.WriteLine($"Incorrect. The correct answer is {correctAnswer}.");
                 }
         }
-        Console.WriteLine($"\nGame Over! Your final score is: {score}/5");
+        Console.WriteLine($"\nGame Over! Your final score is: {score}/5\n");
     }
 
     public void StartMultiplicationGame()
@@ -101,7 +101,7 @@ public class OperationsTasks
 
         Console.WriteLine
         (
-        @"Welcome to the Multiplication Game!
+        @"  Welcome to the Multiplication Game!
         In this game, you will be given two numbers, and you need to calculate their product.
         Let's get started!"
         );
@@ -111,7 +111,7 @@ public class OperationsTasks
             int number1 = random.Next(1, 101);
             int number2 = random.Next(1, 101);
 
-            Console.WriteLine($"\nWhat is {number1} * {number2}?"); // Prompt the user with the multiplication question
+            Console.WriteLine($"\nWhat is: {number1} * {number2}?"); // Prompt the user with the multiplication question
             int correctAnswer = number1 * number2; // Game calculates the correct answer
             int userAnswer;
             while (true)
@@ -136,7 +136,7 @@ public class OperationsTasks
                     Console.WriteLine($"Incorrect. The correct answer is {correctAnswer}.");
                 }
         }
-        Console.WriteLine($"\nGame Over! Your final score is: {score}/5");
+        Console.WriteLine($"\nGame Over! Your final score is: {score}/5\n");
     }
 
     public void StartDivisionGame()
@@ -147,7 +147,7 @@ public class OperationsTasks
 
         Console.WriteLine
         (
-        @"Welcome to the Division Game!
+        @"  Welcome to the Division Game!
         In this game, you will be given two numbers, and you need to calculate their quotient.
         Let's get started!"
         );
@@ -160,7 +160,7 @@ public class OperationsTasks
             int result = random.Next(1, maxResult + 1);
             int number1 = number2 * result; // Ensure that the division will yield an integer result
 
-            Console.WriteLine($"\nWhat is {number1} / {number2}?"); // Prompt the user with the division question
+            Console.WriteLine($"\nWhat is: {number1} / {number2}?"); // Prompt the user with the division question
             int correctAnswer = number1 / number2; // Game calculates the correct answer (integer division)
             int userAnswer;
             while (true)
@@ -185,7 +185,7 @@ public class OperationsTasks
                     Console.WriteLine($"Incorrect. The correct answer is {correctAnswer}.");
                 }
         }
-        Console.WriteLine($"\nGame Over! Your final score is: {score}/5");
+        Console.WriteLine($"\nGame Over! Your final score is: {score}/5\n");
     }
 
     public void StartRandomOperationsGame()

@@ -1,16 +1,18 @@
-﻿while (true)
+﻿using MathGame;
+
+while (true)
 {
     Console.WriteLine
     (
-    @"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    \\\\ Welcome to the Math Game! \\\\
+    @"  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+   \\\\\ Welcome to the Math Game! \\\\
     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"
     );
 
     Console.Write("\nPlease enter your name: ");
     string playerName = Console.ReadLine() ?? "Player"; // If the user doesn't enter a name, default to "Player"
 
-    Console.WriteLine($"\nHello, {playerName}! Let's play the Math Game!");
+    Console.WriteLine($"\nHello, {playerName}! Let's play the Math Game!\n");
 
     Console.WriteLine
     (
@@ -31,6 +33,7 @@
         {   
             Console.Write("\nEnter your choice: ");
             string? inputChoice = Console.ReadLine();
+            Console.WriteLine("\n");
             operationChoice = inputChoice switch 
                 {
                     "1" => 1,
@@ -53,5 +56,28 @@
     {
         Console.WriteLine("\nThank you for playing the Math Game! Goodbye!");
         break; // Exit the game
+    }
+
+    OperationsTasks operationTask = new OperationsTasks();
+
+    switch (operationChoice)
+    {
+        case 1:
+            operationTask.StartAdditionGame();
+            break;
+        case 2:
+            operationTask.StartSubtractionGame();
+            break;
+        case 3:
+            operationTask.StartMultiplicationGame();
+            break;
+        case 4:
+            operationTask.StartDivisionGame();
+            break;
+        case 5:
+            operationTask.StartRandomOperationsGame();
+            break;
+        case 9:
+            break;
     }
 }
