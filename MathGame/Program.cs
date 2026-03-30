@@ -63,6 +63,8 @@ while (true)
             case "3": TextDisplayMethods.PrintSeparator(); operationTask.StartMultiplicationGame(); break;
             case "4": TextDisplayMethods.PrintSeparator(); operationTask.StartDivisionGame(); break;
             case "5": TextDisplayMethods.PrintSeparator(); operationTask.StartRandomOperationsGame(); break;
+            
+            // Change player
             case "8": 
                 TextDisplayMethods.PrintSeparator();
 
@@ -70,6 +72,8 @@ while (true)
                 MinorExtensions.PlayerNameChangingLoadingAnimation();
                 Console.ResetColor();
                 break; // This case allows the user to change their player session by showing a loading animation and then prompting them to enter their name again in the main game loop
+            
+            // Story of games. Not implemented
             case "9": 
                 TextDisplayMethods.PrintSeparator();
 
@@ -77,11 +81,15 @@ while (true)
                 MinorExtensions.StoryShowLoadingAnimation();
                 Console.ResetColor();
                 break;
+            
+            // Exit the program
             case "0":
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 MinorExtensions.TypeWriteLine($"Thank you, {playerName}, for playing the Math Game! Goodbye!");
                 Console.ResetColor();
                 return; // Exit the program
+
+            // Wrong input
             default:
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 MinorExtensions.TypeWriteLine("Invalid choice. Please enter a valid number.");
