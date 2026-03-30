@@ -55,7 +55,7 @@ public static class MinorExtensions
     // ANIMATION METHODS END
 
 
-    // Method to wrap text with padding to a given width
+    // Method to wrap text with padding to a given width. Needed forthe info message to ensure it placed inder the big welcome message and doesn't exceed the console width.
     public static string[] WrapText(string text, int maxWidth)
     {
         var words = text.Split(' '); // Split the text into words based on spaces
