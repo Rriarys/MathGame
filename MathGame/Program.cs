@@ -23,78 +23,6 @@ const string menuText = @"
 9. Story of games
 0. Exit";
 
-// Custom methods for typewriting effect
-void TypeWrite(string text, int delay = 15)
-{   
-    foreach (char c in text)
-    {
-        Console.CursorVisible = false;
-        Console.Write(c);
-        Thread.Sleep(delay);
-        Console.CursorVisible = true;
-    }
-}
-
-// Method to typewrite a line of text with a newline at the end
-void TypeWriteLine(string text, int delay = 15)
-{
-    TypeWrite(text, delay);
-    Console.WriteLine();
-}
-
-// Spinner animation method to show a loading effect
-void StoryShowLoadingAnimation()
-{   
-    Console.WriteLine();
-    Console.CursorVisible = false;
-    string[] spinner = { "|", "/", "-", "\\" };
-    for (int i = 0; i < 40; i++)
-    {
-        Console.Write($"\rLoading story of games... {spinner[i % spinner.Length]}");
-        Thread.Sleep(150);
-    }
-    TypeWriteLine("\rDone!".PadRight(30));
-    Console.CursorVisible = true;
-}
-
-void PlayerNameChangingLoadingAnimation()
-{   
-    Console.WriteLine();
-    Console.CursorVisible = false;
-    string[] spinner = { "|", "/", "-", "\\" };
-    for (int i = 0; i < 40; i++)
-    {   
-        Console.Write($"\rChanging player session... {spinner[i % spinner.Length]}");
-        Thread.Sleep(100);
-    }
-    TypeWriteLine("\rDone!".PadRight(30));
-    Console.CursorVisible = true;
-}
-
-// Method to wrap text to a given width
-string[] WrapText(string text, int maxWidth)
-{
-    var words = text.Split(' '); // Split the text into words based on spaces
-    var lines = new List<string>();
-    string currentLine = "";
-
-    foreach (var word in words) // Iterate through each word in the text
-    {
-        if ((currentLine + word).Length > maxWidth)
-        {
-            lines.Add(currentLine.TrimEnd());
-            currentLine = "";
-        }
-
-        currentLine += word + " ";
-    }
-
-    if (!string.IsNullOrWhiteSpace(currentLine))
-        lines.Add(currentLine.TrimEnd());
-
-    return lines.ToArray();
-}
-
 // =============================== MAIN PROGRAM ===============================
 while (true)
 {   
@@ -116,14 +44,14 @@ while (true)
     Console.WriteLine();
 
     // =============================== INFORMATION MESSAGE ===============================
-    var wrappedInfo = WrapText(infoText.Trim(), maxLength - 5); // Wrap the information text to fit within the console window, using the maximum line length from the welcome text minus some padding for better readability
+    var wrappedInfo = MinorExtensions.WrapText(infoText.Trim(), maxLength - 5); // Wrap the information text to fit within the console window, using the maximum line length from the welcome text minus some padding for better readability
     Console.ForegroundColor = ConsoleColor.DarkCyan;
 
     foreach (var line in wrappedInfo)
     {
         int pad = (maxLength - line.Length) / 2;
         int totalPad = (Console.WindowWidth - maxLength) / 2 + pad;
-        TypeWriteLine(new string(' ', totalPad) + line); // Pad the line with spaces on the left to center it in the console window and print it with a typewriting effect
+        MinorExtensions.TypeWriteLine(new string(' ', totalPad) + line); // Pad the line with spaces on the left to center it in the console window and print it with a typewriting effect
     }
     Console.ResetColor();
     Console.WriteLine();
@@ -131,7 +59,7 @@ while (true)
     // =============================== AUTHOR SIGNATURE ===============================
     int signaturePad = (Console.WindowWidth - signatureText.Length) / 2;
     Console.ForegroundColor = ConsoleColor.DarkMagenta;
-    TypeWriteLine(new string(' ', signaturePad) + signatureText);
+    MinorExtensions.TypeWriteLine(new string(' ', signaturePad) + signatureText);
     Console.ResetColor();
 
     Console.WriteLine();
@@ -144,11 +72,11 @@ while (true)
     Console.WriteLine(new string('=', Console.WindowWidth));
     Console.ResetColor();
 
-    TypeWrite("\nPlease enter your name: ");
+    MinorExtensions.TypeWrite("\nPlease enter your name: ");
     string playerName = Console.ReadLine() ?? "Player"; // If the user doesn't enter a name, default to "Player"
 
     Console.ForegroundColor = ConsoleColor.Magenta;
-    TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!\n");
+    MinorExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!\n");
     Console.ResetColor();
 
     // =============================== GAME INSTANCE ===============================
@@ -163,7 +91,7 @@ while (true)
 
         // =============================== MENU DISPLAY ===============================
         Console.ForegroundColor = ConsoleColor.Magenta;
-        TypeWriteLine("\nChoose operation for challenge by entering the corresponding number:\n");
+        MinorExtensions.TypeWriteLine("\nChoose operation for challenge by entering the corresponding number:\n");
         Console.ResetColor();
 
         // Split the menu text into lines, remove empty lines, and convert to an array for processing
@@ -203,7 +131,7 @@ while (true)
 
         // =============================== CHOICE OPERATION ===============================
         ChooseOnceNore:; // If the user enters an invalid choice, this label allows us to prompt them again without restarting the entire game loop
-        TypeWrite("\n\nEnter your choice: ");
+        MinorExtensions.TypeWrite("\n\nEnter your choice: ");
         string? playerChoice = Console.ReadLine();
         Console.WriteLine();
 
@@ -251,7 +179,7 @@ while (true)
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                PlayerNameChangingLoadingAnimation();
+                MinorExtensions.PlayerNameChangingLoadingAnimation();
                 Console.ResetColor();
                 goto ChangePlayer; // Use goto to break out of the inner loop and prompt for a new player name
             case "9":
@@ -261,17 +189,17 @@ while (true)
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                StoryShowLoadingAnimation();
+                MinorExtensions.StoryShowLoadingAnimation();
                 Console.ResetColor();
                 break;
             case "0":
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                TypeWriteLine($"Thank you, {playerName}, for playing the Math Game! Goodbye!");
+                MinorExtensions.TypeWriteLine($"Thank you, {playerName}, for playing the Math Game! Goodbye!");
                 Console.ResetColor();
                 return; // Exit the program
             default:
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                TypeWriteLine("Invalid choice. Please enter a valid number.");
+                MinorExtensions.TypeWriteLine("Invalid choice. Please enter a valid number.");
                 Console.ResetColor();
                 goto ChooseOnceNore; // Prompt the user again if the input is invalid
         }
