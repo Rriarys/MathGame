@@ -43,8 +43,6 @@ while (true)
     MinorExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!\n");
     Console.ResetColor();
 
-    TextDisplayMethods.PrintSeparator();
-
     // Print the menu options for the user to choose from with a typewriting effect
     TextDisplayMethods.PrintMenu(menuText);
 
@@ -59,12 +57,28 @@ while (true)
 
         switch (playerChoice)
         {   
-            // Operation trials
-            case "1": TextDisplayMethods.PrintSeparator(); operationTask.StartAdditionGame(); break;
-            case "2": TextDisplayMethods.PrintSeparator(); operationTask.StartSubtractionGame(); break;
-            case "3": TextDisplayMethods.PrintSeparator(); operationTask.StartMultiplicationGame(); break;
-            case "4": TextDisplayMethods.PrintSeparator(); operationTask.StartDivisionGame(); break;
-            case "5": TextDisplayMethods.PrintSeparator(); operationTask.StartRandomOperationsGame(); break;
+            // +
+            case "1": 
+            TextDisplayMethods.PrintSeparator(); operationTask.StartAdditionGame(); 
+            TextDisplayMethods.PrintMenu(menuText); break;
+
+            // -
+            case "2": 
+            TextDisplayMethods.PrintSeparator(); operationTask.StartSubtractionGame(); 
+            TextDisplayMethods.PrintMenu(menuText); break;
+
+            // *
+            case "3": 
+            TextDisplayMethods.PrintSeparator(); operationTask.StartMultiplicationGame(); 
+            TextDisplayMethods.PrintMenu(menuText); break;
+
+            // /
+            case "4": 
+            TextDisplayMethods.PrintSeparator(); operationTask.StartDivisionGame(); 
+            TextDisplayMethods.PrintMenu(menuText); break;
+
+            // Random operation
+            case "5": TextDisplayMethods.PrintSeparator(); operationTask.StartRandomOperationsGame(); TextDisplayMethods.PrintMenu(menuText); break;
             
             // Change player
             case "8": 

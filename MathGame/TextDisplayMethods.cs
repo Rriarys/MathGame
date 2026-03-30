@@ -62,7 +62,7 @@ public static class TextDisplayMethods
     // =============================== MENU DISPLAY ===============================
     public static void PrintMenu(string menuText)
     {
-
+        PrintSeparator();
         Console.ForegroundColor = ConsoleColor.Magenta;
         MinorExtensions.TypeWriteLine("\nChoose operation for challenge by entering the corresponding number:\n");
         Console.ResetColor();
