@@ -35,6 +35,7 @@ while (true)
 {   
     TextDisplayMethods.PrintSeparator(); // Print a separator line to visually separate different sections of the console output
 
+    bool isChangingPlayer = false; // Flag to track if the player session is being changed
     MinorExtensions.TypeWrite("\nPlease enter your name: ");
     string playerName = Console.ReadLine() ?? "Player"; // If the user doesn't enter a name, default to "Player"
 
@@ -57,7 +58,8 @@ while (true)
         Console.WriteLine();
 
         switch (playerChoice)
-        {
+        {   
+            // Operation trials
             case "1": TextDisplayMethods.PrintSeparator(); operationTask.StartAdditionGame(); break;
             case "2": TextDisplayMethods.PrintSeparator(); operationTask.StartSubtractionGame(); break;
             case "3": TextDisplayMethods.PrintSeparator(); operationTask.StartMultiplicationGame(); break;
@@ -71,7 +73,8 @@ while (true)
                 Console.ForegroundColor = ConsoleColor.Green;
                 MinorExtensions.PlayerNameChangingLoadingAnimation();
                 Console.ResetColor();
-                break; // This case allows the user to change their player session by showing a loading animation and then prompting them to enter their name again in the main game loop
+                isChangingPlayer = true; // Set the flag to indicate that the player session is being changed
+                break;
             
             // Story of games. Not implemented
             case "9": 
@@ -96,5 +99,8 @@ while (true)
                 Console.ResetColor();
                 continue; // Prompt the user again without breaking the loop
         }
+
+        if (isChangingPlayer) // If the player session is being changed, break the inner loop to return to the outer loop and prompt for a new player name
+            break;
     }
 }
