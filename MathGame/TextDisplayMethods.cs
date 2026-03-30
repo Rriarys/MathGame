@@ -5,10 +5,12 @@ public static class TextDisplayMethods
 {
     // =============================== SEPARATOR ===============================
     public static void PrintSeparator()
-    {
+    {   
+        Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine(new string('=', Console.WindowWidth));
         Console.ResetColor();
+        Console.WriteLine();
     }
 
     // =============================== WELCOME MESSAGE ===============================
@@ -55,8 +57,6 @@ public static class TextDisplayMethods
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         MinorExtensions.TypeWriteLine(new string(' ', signaturePad) + signatureText);
         Console.ResetColor();
-
-        Console.WriteLine();
     }
 
     // =============================== MENU DISPLAY ===============================
@@ -64,7 +64,7 @@ public static class TextDisplayMethods
     {
         PrintSeparator();
         Console.ForegroundColor = ConsoleColor.Magenta;
-        MinorExtensions.TypeWriteLine("\nChoose operation for challenge by entering the corresponding number:\n");
+        MinorExtensions.TypeWriteLine("Choose operation for challenge by entering the corresponding number:\n");
         Console.ResetColor();
 
         // Split the menu text into lines, remove empty lines, and convert to an array for processing

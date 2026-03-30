@@ -27,7 +27,6 @@ public static class MinorExtensions
     // Spinner animation method to show a loading effect
     public static void StoryShowLoadingAnimation()
     {   
-        Console.WriteLine();
         Console.CursorVisible = false;
         string[] spinner = { "|", "/", "-", "\\" };
         for (int i = 0; i < 40; i++)
@@ -41,7 +40,6 @@ public static class MinorExtensions
 
     public static void PlayerNameChangingLoadingAnimation()
     {   
-        Console.WriteLine();
         Console.CursorVisible = false;
         string[] spinner = { "|", "/", "-", "\\" };
         for (int i = 0; i < 40; i++)

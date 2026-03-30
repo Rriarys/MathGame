@@ -32,15 +32,15 @@ TextDisplayMethods.PrintAuthorSignature(signatureText); // Print the author sign
 
 // =============================== MAIN PROGRAM ===============================
 while (true)
-{   
+{      
     TextDisplayMethods.PrintSeparator(); // Print a separator line to visually separate different sections of the console output
 
     bool isChangingPlayer = false; // Flag to track if the player session is being changed
-    MinorExtensions.TypeWrite("\nPlease enter your name: ");
+    MinorExtensions.TypeWrite("Please enter your name: ");
     string playerName = Console.ReadLine() ?? "Player"; // If the user doesn't enter a name, default to "Player"
 
     Console.ForegroundColor = ConsoleColor.Magenta;
-    MinorExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!\n");
+    MinorExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!");
     Console.ResetColor();
 
     // Print the menu options for the user to choose from with a typewriting effect
@@ -51,9 +51,8 @@ while (true)
     while (true)
     {   
         // =============================== CHOICE OPERATION ===============================
-        MinorExtensions.TypeWrite("\n\nEnter your choice: ");
+        MinorExtensions.TypeWrite("\nEnter your choice: ");
         string? playerChoice = Console.ReadLine();
-        Console.WriteLine();
 
         switch (playerChoice)
         {   
@@ -97,6 +96,8 @@ while (true)
                 Console.ForegroundColor = ConsoleColor.Green;
                 MinorExtensions.StoryShowLoadingAnimation();
                 Console.ResetColor();
+
+                TextDisplayMethods.PrintMenu(menuText);
                 break;
             
             // Exit the program
