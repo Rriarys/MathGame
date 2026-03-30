@@ -67,10 +67,7 @@ while (true)
     // =============================== GOTO ===============================
     ChangePlayer:; // Label for changing player, used with goto statement
 
-    // =============================== SEPARATOR ===============================
-    Console.ForegroundColor = ConsoleColor.DarkGray;
-    Console.WriteLine(new string('=', Console.WindowWidth));
-    Console.ResetColor();
+    MinorExtensions.PrintSeparator(); // Print a separator line to visually separate different sections of the console output
 
     MinorExtensions.TypeWrite("\nPlease enter your name: ");
     string playerName = Console.ReadLine() ?? "Player"; // If the user doesn't enter a name, default to "Player"
@@ -84,10 +81,7 @@ while (true)
     
     while (true)
     {   
-        // =============================== SEPARATOR ===============================
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine(new string('=', Console.WindowWidth));
-        Console.ResetColor();
+        MinorExtensions.PrintSeparator();
 
         // =============================== MENU DISPLAY ===============================
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -138,10 +132,7 @@ while (true)
         switch (playerChoice)
         {
             case "1": 
-                // =============================== SEPARATOR ===============================
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(new string('=', Console.WindowWidth));
-                Console.ResetColor();
+                MinorExtensions.PrintSeparator();
 
                 operationTask.StartAdditionGame(); break;
             case "2": 
@@ -152,41 +143,26 @@ while (true)
 
                 operationTask.StartSubtractionGame(); break;
             case "3": 
-                // =============================== SEPARATOR ===============================
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(new string('=', Console.WindowWidth));
-                Console.ResetColor();
+                MinorExtensions.PrintSeparator();
                 
                 operationTask.StartMultiplicationGame(); break;
             case "4": 
-                // =============================== SEPARATOR ===============================
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(new string('=', Console.WindowWidth));
-                Console.ResetColor();
+                MinorExtensions.PrintSeparator();
 
                 operationTask.StartDivisionGame(); break;
             case "5": 
-                // =============================== SEPARATOR ===============================
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(new string('=', Console.WindowWidth));
-                Console.ResetColor();
+                MinorExtensions.PrintSeparator();
 
                 operationTask.StartRandomOperationsGame(); break;
             case "8":
-                // =============================== SEPARATOR ===============================
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(new string('=', Console.WindowWidth));
-                Console.ResetColor();
+                MinorExtensions.PrintSeparator();
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 MinorExtensions.PlayerNameChangingLoadingAnimation();
                 Console.ResetColor();
                 goto ChangePlayer; // Use goto to break out of the inner loop and prompt for a new player name
             case "9":
-                // =============================== SEPARATOR ===============================
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(new string('=', Console.WindowWidth));
-                Console.ResetColor();
+                MinorExtensions.PrintSeparator();
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 MinorExtensions.StoryShowLoadingAnimation();

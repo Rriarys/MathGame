@@ -77,4 +77,12 @@ public static class MinorExtensions
 
         return lines.ToArray();
     }
+
+    // =============================== SEPARATOR ===============================
+    public static void PrintSeparator()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(new string('=', Console.WindowWidth));
+        Console.ResetColor();
+    }
 }
