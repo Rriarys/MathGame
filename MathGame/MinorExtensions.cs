@@ -52,9 +52,10 @@ public static class MinorExtensions
         TypeWriteLine("\rDone!".PadRight(30));
         Console.CursorVisible = true;
     }
+    // ANIMATION METHODS END
 
 
-    // Method to wrap text to a given width
+    // Method to wrap text with padding to a given width
     public static string[] WrapText(string text, int maxWidth)
     {
         var words = text.Split(' '); // Split the text into words based on spaces
@@ -76,13 +77,5 @@ public static class MinorExtensions
             lines.Add(currentLine.TrimEnd());
 
         return lines.ToArray();
-    }
-
-    // =============================== SEPARATOR ===============================
-    public static void PrintSeparator()
-    {
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine(new string('=', Console.WindowWidth));
-        Console.ResetColor();
     }
 }
