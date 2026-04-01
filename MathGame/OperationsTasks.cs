@@ -40,10 +40,10 @@ Mix of all operations.
 
         for (int i = 0; i < 5; i++)
         {
-            var (num1, num2, symbol, correctAnswer) = questionGenerator(random); // Generate a question using the provided question generator function and unpack the returned tuple into individual variables for easier use in the game logic.
+            var (num1, num2, symbol, correctAnswer) = questionGenerator(random); // Generate a question using the provided question generator function and unpack the returned tuple into individual variables for easier use in the game logic
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            MinorExtensions.TypeWriteLine($"Question {i + 1}: {num1} {symbol} {num2} = ?"); // Print the question to the console with a typewriting effect, using the generated numbers and operation symbol to create the question format.
+            MinorExtensions.TypeWriteLine($"Question {i + 1}: {num1} {symbol} {num2} = ?"); // Print the question to the console with a typewriting effect, using the generated numbers and operation symbol to create the question format
             Console.ResetColor();
 
             int userAnswer;
@@ -87,7 +87,7 @@ Mix of all operations.
     }
 
     // =============================== GENERATORS ===============================
-    private (int, int, string, int) GenerateAddition(Random random) // Method to generate a random addition question, returning the two numbers, the operation symbol, and the correct answer as a tuple.
+    private (int, int, string, int) GenerateAddition(Random random) // Method to generate a random addition question, returning the two numbers, the operation symbol, and the correct answer as a tuple
     {
         int a = random.Next(1, 101);
         int b = random.Next(1, 101);
@@ -103,16 +103,16 @@ Mix of all operations.
 
     private (int, int, string, int) GenerateMultiplication(Random random)
     {
-        int a = random.Next(1, 21);
+        int a = random.Next(1, 21); // To keep the multiplication questions manageable and suitable for a wider range of players, we limit the random numbers to a smaller range (1 to 20). This way, the multiplication questions will be more reasonable and less likely to produce very large results
         int b = random.Next(1, 21);
         return (a, b, "*", a * b);
     }
 
     private (int, int, string, int) GenerateDivision(Random random)
     {
-        int divisor = random.Next(2, 51); // To ensure we don't have division by zero and to keep the numbers manageable, we start from 2 and limit the divisor to 50 for better gameplay experience. This way, the division questions will be more reasonable and less likely to produce very large or very small results, making it more suitable for a wider range of players.
+        int divisor = random.Next(2, 51); // To ensure we don't have division by zero and to keep the numbers manageable, we start from 2 and limit the divisor to 50 for better gameplay experience. This way, the division questions will be more reasonable and less likely to produce very large or very small results, making it more suitable for a wider range of players
         int maxResult = 100 / divisor;
-        int result = random.Next(1, maxResult + 1); // Calculate the maximum possible result based on the divisor to ensure that the generated division question remains within a reasonable range for players. This prevents generating questions that would yield very large results, which could be overwhelming or less engaging for players, especially younger ones. By limiting the result based on the divisor, we can create a more balanced and enjoyable gaming experience.
+        int result = random.Next(1, maxResult + 1); // Calculate the maximum possible result based on the divisor to ensure that the generated division question remains within a reasonable range for players. This prevents generating questions that would yield very large results, which could be overwhelming or less engaging for players, especially younger ones. By limiting the result based on the divisor, we can create a more balanced and enjoyable gaming experience
         int dividend = divisor * result;
 
         return (dividend, divisor, "/", result);
@@ -121,7 +121,7 @@ Mix of all operations.
     // =============================== REALISATIONS ===============================
     public void StartAdditionGame()
     {
-        RunGame(GenerateAddition, additionDescription); // Start the addition game by calling the RunGame method with the GenerateAddition function as the question generator and the addition description as the game introduction text.
+        RunGame(GenerateAddition, additionDescription); // Start the addition game by calling the RunGame method with the GenerateAddition function as the question generator and the addition description as the game introduction text
     }
 
     public void StartSubtractionGame()
