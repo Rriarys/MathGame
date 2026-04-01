@@ -83,7 +83,7 @@ while (true)
             case "8": 
                 TextDisplayMethods.PrintSeparator();
 
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 MinorExtensions.PlayerNameChangingLoadingAnimation();
                 Console.ResetColor();
                 isChangingPlayer = true; // Set the flag to indicate that the player session is being changed
@@ -93,7 +93,7 @@ while (true)
             case "9": 
                 TextDisplayMethods.PrintSeparator();
 
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 MinorExtensions.StoryShowLoadingAnimation();
                 Console.ResetColor();
 
@@ -103,7 +103,7 @@ while (true)
             // Exit the program
             case "0":
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                MinorExtensions.TypeWriteLine($"Thank you, {playerName}, for playing the Math Game! Goodbye!");
+                MinorExtensions.TypeWriteLine($"\nThank you, {playerName}, for playing the Math Game! Goodbye!");
                 Console.ResetColor();
                 return; // Exit the program
 

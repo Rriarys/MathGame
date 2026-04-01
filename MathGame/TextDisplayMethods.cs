@@ -13,6 +13,16 @@ public static class TextDisplayMethods
         Console.WriteLine();
     }
 
+    // =============================== SMALL SEPARATOR ===============================
+    public static void PrintSmallSeparator()
+    {   
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(new string('-', Console.WindowWidth));
+        Console.ResetColor();
+        Console.WriteLine();
+    }
+
     // =============================== WELCOME MESSAGE ===============================
     public static void PrintWelcomeMessage(string welcomeText)
     {

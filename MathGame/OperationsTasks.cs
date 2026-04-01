@@ -13,13 +13,18 @@ public class OperationsTasks
         int score = 0;
         Random random = new();
 
+        Console.ForegroundColor = ConsoleColor.Magenta;
         MinorExtensions.TypeWrite(description);
+        Console.ResetColor();
 
         for (int i = 0; i < 5; i++)
         {
             var (num1, num2) = numberGenerator(random); // Generate two random numbers for the question using the provided number generator
 
-            MinorExtensions.TypeWriteLine($"\nQuestion {i + 1}: {num1} {symbol} {num2} is... ?");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            MinorExtensions.TypeWriteLine($"Question {i + 1}: {num1} {symbol} {num2} is... ?");
+            Console.ResetColor();
+
             int correctAnswer = operation(num1, num2); // Calculate the correct answer using the provided operation function
 
             int userAnswer;
@@ -31,7 +36,9 @@ public class OperationsTasks
 
                 if(userInput is null || !int.TryParse(userInput, out userAnswer)) // Validate the user input to ensure it's a valid integer. If not, prompt the user to enter a valid answer.
                 {
-                    MinorExtensions.TypeWrite("\nInvalid input. Please enter a valid integer answer: ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    MinorExtensions.TypeWrite("\nInvalid input. Please enter a valid integer answer: \n");
+                    Console.ResetColor();
                     continue;
                 }
 
@@ -40,17 +47,26 @@ public class OperationsTasks
 
             if (userAnswer == correctAnswer)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 MinorExtensions.TypeWriteLine("\nCorrect!");
+                Console.ResetColor();
+                TextDisplayMethods.PrintSmallSeparator();
                 score++;
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 MinorExtensions.TypeWriteLine($"\nWrong! The correct answer was: {correctAnswer}");
+                Console.ResetColor();
+                TextDisplayMethods.PrintSmallSeparator();
             }
-
-            MinorExtensions.TypeWrite($"\nGame Over! Your final score is: {score}/5\n");
         }
+
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            MinorExtensions.TypeWrite($"Game Over! Your final score is: {score}/5\n");
+            Console.ResetColor();
     }
+
     public void StartAdditionGame()
     {
         RunGame(
@@ -58,7 +74,9 @@ public class OperationsTasks
             (a, b) => a + b,
             random => (random.Next(1, 101), random.Next(1, 101)),
             @"Welcome to the Addition Game!
-Calculate the sum of two numbers.");
+Calculate the sum of two numbers.
+
+");
     }
 
     public void StartSubtractionGame()
@@ -68,7 +86,9 @@ Calculate the sum of two numbers.");
             (a, b) => a - b,
             random => (random.Next(1, 101), random.Next(1, 101)),
             @"Welcome to the Subtraction Game!
-Calculate the difference between two numbers.");
+Calculate the difference between two numbers.
+
+");
     }
 
     public void StartMultiplicationGame()
@@ -78,7 +98,9 @@ Calculate the difference between two numbers.");
             (a, b) => a * b,
             random => (random.Next(1, 101), random.Next(1, 101)),
             @"Welcome to the Multiplication Game!
-Calculate the product of two numbers.");
+Calculate the product of two numbers.
+
+");
     }
 
     public void StartDivisionGame()
@@ -94,8 +116,9 @@ Calculate the product of two numbers.");
                 return (num1, num2);
             },
             @"Welcome to the Division Game!
-Calculate the quotient of two numbers."
-        );
+Calculate the quotient of two numbers.
+
+");
     }
 
     public void StartRandomOperationsGame()
