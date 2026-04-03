@@ -90,14 +90,14 @@ Mix of all operations.
     }
 
     // =============================== DIFFICULTY ===============================
-    private int GetMaxDifficulty(int difficulty, int easy, int medium, int hard) // Method to determine the maximum difficulty level based on the player's choice, returning the corresponding value for easy, medium, or hard difficulty levels
+    private int GetMaxDifficulty(int difficulty, int easy, int medium, int hard) // Method to determine the maximum difficulty level based on the player's choice, returning the corresponding value for easy, medium, or hard difficulty levels (easy, medium, hard it's just name of parameters, instead of 20, 50, 100)
     {
         return difficulty switch
         {
             1 => easy,
             2 => medium,
             3 => hard,
-            _ => medium
+            _ => medium // Never be reached, just for no warnings, MinorExtensions.SelectDifficulty() - garantees that difficulty will be between 1 and 3
         };
     }
 
@@ -134,12 +134,15 @@ Mix of all operations.
 
     private (int, int, string, int) GenerateDivision(Random random, int difficulty)
     {
-        int maxDividend = GetMaxDifficulty(difficulty, 50, 100, 500);
+        int maxResult = GetMaxDifficulty(difficulty, 6, 12, 20); // The max Result difficulty
 
-        int divisor = random.Next(2, maxDividend + 1);
-        int maxResult = maxDividend / divisor;
+        int result = random.Next(2, maxResult + 1); // 1 too easy, so skip it
 
-        int result = random.Next(1, maxResult + 1);
+        int maxDividend = GetMaxDifficulty(difficulty, 120, 340, 560); // The max Dividend size
+        int maxDivisor = maxDividend / result;
+
+        int divisor = random.Next(2, Math.Min(maxDivisor, maxResult) + 1); // Ensure the divisor is not too large to keep the division manageable and the result within the desired difficulty range
+
         int dividend = divisor * result;
 
         return (dividend, divisor, "/", result);

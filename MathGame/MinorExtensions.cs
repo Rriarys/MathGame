@@ -7,7 +7,7 @@ public static class MinorExtensions
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
         TypeWriteLine($"You chose {optionName}, please select difficulty:");
-        TypeWriteLine("(1 - Easy, 2 - Medium, 3 - Hard)");
+        TypeWriteLine("(1 - Easy, 2 - Medium, 3 - Hard, any other key - Random difficulty)");
         Console.ResetColor();
         TypeWrite("\nEnter difficulty (1-3): ");
 
@@ -18,9 +18,13 @@ public static class MinorExtensions
 
             if (int.TryParse(input, out int diff) && diff >= 1 && diff <= 3) // Check if the input is a valid integer between 1 and 3, representing the difficulty levels
                 return diff;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            TypeWriteLine("\nInvalid difficulty. Try again:\n");
-            Console.ResetColor();
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                TypeWriteLine("\nRandom difficulty selected.\n");
+                Console.ResetColor();
+                return new Random().Next(1, 4); // Return a random difficulty level between 1 and 3 if the input is invalid, ensuring that the game can proceed with a randomly selected difficulty level
+            }
         }
     }
 
