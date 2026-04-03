@@ -5,7 +5,7 @@ public static class TextDisplayMethods
 {
     // =============================== SEPARATOR ===============================
     public static void PrintSeparator()
-    {   
+    {
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine(new string('=', Console.WindowWidth));
@@ -25,7 +25,7 @@ public static class TextDisplayMethods
 
     // =============================== WELCOME MESSAGE ===============================
     public static void PrintWelcomeMessage(string welcomeText)
-    {
+    {   
         var welcomeLines = welcomeText // Split the welcome text into lines, remove empty lines, and convert to an array for processing
             .Split('\n')
             .Where(l => !string.IsNullOrWhiteSpace(l))
@@ -46,7 +46,6 @@ public static class TextDisplayMethods
     // =============================== INFORMATION MESSAGE ===============================
     public static void PrintInformationMessage(string infoText, int maxLength)
     {
-          
         var wrappedInfo = MinorExtensions.WrapText(infoText.Trim(), maxLength - 5); // Wrap the information text to fit within the console window, using the maximum line length from the welcome text minus some padding for better readability
         Console.ForegroundColor = ConsoleColor.DarkCyan;
 
