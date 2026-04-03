@@ -37,7 +37,7 @@ while (true)
 
     bool isChangingPlayer = false; // Flag to track if the player session is being changed
     MinorExtensions.TypeWrite("Please enter your name: ");
-    string playerName = Console.ReadLine() ?? "Player"; // If the user doesn't enter a name, default to "Player"
+    string playerName = Console.ReadLine()?.Trim() ?? "Player"; // If the user doesn't enter a name, default to "Player"
 
     Console.ForegroundColor = ConsoleColor.Magenta;
     MinorExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!");
@@ -47,37 +47,51 @@ while (true)
     TextDisplayMethods.PrintMenu(menuText);
 
     OperationsTasks operationTask = new OperationsTasks(); // Create an instance of OperationsTasks to call the game methods
+
+    int difficulty; // Variable to store the selected difficulty level for the games
     
     while (true)
     {   
         // =============================== CHOICE OPERATION ===============================
         MinorExtensions.TypeWrite("\nEnter your choice: ");
-        string? playerChoice = Console.ReadLine();
+        string? playerChoice = Console.ReadLine()?.Trim();
 
         switch (playerChoice)
         {   
             // +
             case "1": 
-            TextDisplayMethods.PrintSeparator(); operationTask.StartAdditionGame(); 
+            TextDisplayMethods.PrintSeparator(); 
+            difficulty = MinorExtensions.SelectDifficulty("Addition game");
+            operationTask.StartAdditionGame(difficulty); 
             TextDisplayMethods.PrintMenu(menuText); break;
 
             // -
             case "2": 
-            TextDisplayMethods.PrintSeparator(); operationTask.StartSubtractionGame(); 
+            TextDisplayMethods.PrintSeparator();
+            difficulty = MinorExtensions.SelectDifficulty("Subtraction game");
+            operationTask.StartSubtractionGame(difficulty); 
             TextDisplayMethods.PrintMenu(menuText); break;
 
             // *
             case "3": 
-            TextDisplayMethods.PrintSeparator(); operationTask.StartMultiplicationGame(); 
+            TextDisplayMethods.PrintSeparator(); 
+            difficulty = MinorExtensions.SelectDifficulty("Multiplication game");
+            operationTask.StartMultiplicationGame(difficulty); 
             TextDisplayMethods.PrintMenu(menuText); break;
 
             // /
             case "4": 
-            TextDisplayMethods.PrintSeparator(); operationTask.StartDivisionGame(); 
+            TextDisplayMethods.PrintSeparator(); 
+            difficulty = MinorExtensions.SelectDifficulty("Division game");
+            operationTask.StartDivisionGame(difficulty); 
             TextDisplayMethods.PrintMenu(menuText); break;
 
             // Random operation
-            case "5": TextDisplayMethods.PrintSeparator(); operationTask.StartRandomOperationsGame(); TextDisplayMethods.PrintMenu(menuText); break;
+            case "5": 
+            TextDisplayMethods.PrintSeparator(); 
+            difficulty = MinorExtensions.SelectDifficulty("Random operations game");
+            operationTask.StartRandomOperationsGame(difficulty); 
+            TextDisplayMethods.PrintMenu(menuText); break;
             
             // Change player
             case "8": 
@@ -110,7 +124,7 @@ while (true)
             // Wrong input
             default:
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                MinorExtensions.TypeWriteLine("Invalid choice. Please enter a valid number.");
+                MinorExtensions.TypeWriteLine("\nInvalid choice. Please enter a valid number.");
                 Console.ResetColor();
                 continue; // Prompt the user again without breaking the loop
         }

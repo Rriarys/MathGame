@@ -14,12 +14,10 @@ Calculate the difference between two numbers.
 Calculate the product of two numbers.
 
 ";
-
     const string divisionDescription = @"Welcome to the Division Game!
 Calculate the quotient of two numbers.
 
 ";
-
     const string randomOperationsDescription = @"Welcome to the Random Operations Game!
 Mix of all operations.
 
@@ -27,8 +25,9 @@ Mix of all operations.
 
     // =============================== CORE ===============================
     private void RunGame(
-        Func<Random, (int num1, int num2, string symbol, int correctAnswer)> questionGenerator, // Function to generate questions based on the type of operation
-        string description
+        Func<Random, int, (int num1, int num2, string symbol, int correctAnswer)> questionGenerator, // Function parameter that generates a question based on the provided random number generator and difficulty level, returning a tuple containing the two numbers, the operation symbol, and the correct answer
+        string description,
+        int difficulty
     )
     {
         int score = 0;
@@ -40,7 +39,7 @@ Mix of all operations.
 
         for (int i = 0; i < 5; i++)
         {
-            var (num1, num2, symbol, correctAnswer) = questionGenerator(random); // Generate a question using the provided question generator function and unpack the returned tuple into individual variables for easier use in the game logic
+            var (num1, num2, symbol, correctAnswer) = questionGenerator(random, difficulty); // Difficulty parameter is passed to the question generator function, allowing it to create questions that are appropriate for the selected difficulty level
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             MinorExtensions.TypeWriteLine($"Question {i + 1}: {num1} {symbol} {num2} = ?"); // Print the question to the console with a typewriting effect, using the generated numbers and operation symbol to create the question format
@@ -51,7 +50,7 @@ Mix of all operations.
             while (true)
             {
                 MinorExtensions.TypeWrite("\nYour answer: ");
-                string? userInput = Console.ReadLine();
+                string? userInput = Console.ReadLine()?.Trim();
 
                 if (userInput is null || !int.TryParse(userInput, out userAnswer))
                 {
@@ -86,77 +85,104 @@ Mix of all operations.
         Console.ResetColor();
     }
 
-    // =============================== GENERATORS ===============================
-    private (int, int, string, int) GenerateAddition(Random random) // Method to generate a random addition question, returning the two numbers, the operation symbol, and the correct answer as a tuple
+    // =============================== DIFFICULTY ===============================
+    private int GetMaxDifficulty(int difficulty, int easy, int medium, int hard) // Method to determine the maximum difficulty level based on the player's choice, returning the corresponding value for easy, medium, or hard difficulty levels
     {
-        int a = random.Next(1, 101);
-        int b = random.Next(1, 101);
+        return difficulty switch
+        {
+            1 => easy,
+            2 => medium,
+            3 => hard,
+            _ => medium
+        };
+    }
+
+    // =============================== GENERATORS ===============================
+    private (int, int, string, int) GenerateAddition(Random random, int difficulty) // Method to generate an addition question based on the provided random number generator and difficulty level, returning a tuple containing the two numbers, the operation symbol, and the correct answer
+    {
+        int maxDifficulty = GetMaxDifficulty(difficulty, 20, 50, 100);
+
+        int a = random.Next(1, maxDifficulty + 1);
+        int b = random.Next(1, maxDifficulty + 1);
+
         return (a, b, "+", a + b);
     }
 
-    private (int, int, string, int) GenerateSubtraction(Random random)
+    private (int, int, string, int) GenerateSubtraction(Random random, int difficulty)
     {
-        int a = random.Next(1, 101);
-        int b = random.Next(1, 101);
+        int maxDifficulty = GetMaxDifficulty(difficulty, 20, 50, 100);
+
+        int a = random.Next(1, maxDifficulty + 1);
+        int b = random.Next(1, maxDifficulty + 1);
+
         return (a, b, "-", a - b);
     }
 
-    private (int, int, string, int) GenerateMultiplication(Random random)
+    private (int, int, string, int) GenerateMultiplication(Random random, int difficulty)
     {
-        int a = random.Next(1, 21); // To keep the multiplication questions manageable and suitable for a wider range of players, we limit the random numbers to a smaller range (1 to 20). This way, the multiplication questions will be more reasonable and less likely to produce very large results
-        int b = random.Next(1, 21);
+        int maxDifficulty = GetMaxDifficulty(difficulty, 20, 50, 100);
+
+        int a = random.Next(1, maxDifficulty + 1);
+        int b = random.Next(1, maxDifficulty + 1);
+
         return (a, b, "*", a * b);
     }
 
-    private (int, int, string, int) GenerateDivision(Random random)
+    private (int, int, string, int) GenerateDivision(Random random, int difficulty)
     {
-        int divisor = random.Next(2, 51); // To ensure we don't have division by zero and to keep the numbers manageable, we start from 2 and limit the divisor to 50 for better gameplay experience. This way, the division questions will be more reasonable and less likely to produce very large or very small results, making it more suitable for a wider range of players
-        int maxResult = 100 / divisor;
-        int result = random.Next(1, maxResult + 1); // Calculate the maximum possible result based on the divisor to ensure that the generated division question remains within a reasonable range for players. This prevents generating questions that would yield very large results, which could be overwhelming or less engaging for players, especially younger ones. By limiting the result based on the divisor, we can create a more balanced and enjoyable gaming experience
+        int maxDividend = GetMaxDifficulty(difficulty, 50, 100, 500);
+
+        int divisor = random.Next(2, maxDividend + 1);
+        int maxResult = maxDividend / divisor;
+
+        int result = random.Next(1, maxResult + 1);
         int dividend = divisor * result;
 
         return (dividend, divisor, "/", result);
     }
 
     // =============================== REALISATIONS ===============================
-    public void StartAdditionGame()
+    public void StartAdditionGame(int difficulty)
     {
-        RunGame(GenerateAddition, additionDescription); // Start the addition game by calling the RunGame method with the GenerateAddition function as the question generator and the addition description as the game introduction text
+        RunGame(GenerateAddition, additionDescription, difficulty);
     }
 
-    public void StartSubtractionGame()
+    public void StartSubtractionGame(int difficulty)
     {
-        RunGame(GenerateSubtraction, subtractionDescription);
+        RunGame(GenerateSubtraction, subtractionDescription, difficulty);
     }
 
-    public void StartMultiplicationGame()
+    public void StartMultiplicationGame(int difficulty)
     {
-        RunGame(GenerateMultiplication, multiplicationDescription);
+        RunGame(GenerateMultiplication, multiplicationDescription, difficulty);
     }
 
-    public void StartDivisionGame()
+    public void StartDivisionGame(int difficulty)
     {
-        RunGame(GenerateDivision, divisionDescription);
+        RunGame(GenerateDivision, divisionDescription, difficulty);
     }
 
     // =============================== RANDOM OPERATIONS ===============================
-    public void StartRandomOperationsGame()
+    public void StartRandomOperationsGame(int difficulty)
     {
         RunGame(
-            random =>
+            (random, difficulty) =>
             {
                 int operationType = random.Next(1, 5);
 
                 return operationType switch
                 {
-                    1 => GenerateAddition(random),
-                    2 => GenerateSubtraction(random),
-                    3 => GenerateMultiplication(random),
-                    4 => GenerateDivision(random),
+                    1 => GenerateAddition(random, difficulty),
+                    2 => GenerateSubtraction(random, difficulty),
+                    3 => GenerateMultiplication(random, difficulty),
+                    4 => GenerateDivision(random, difficulty),
                     _ => (0, 0, "", 0)
                 };
             },
-            randomOperationsDescription
+            randomOperationsDescription,
+            difficulty
         );
     }
 }
+
+// Strategy pattern is used to create a flexible and reusable game structure that can easily accommodate different types of math operations (addition, subtraction, multiplication, division) without duplicating code. By defining a common game logic in the RunGame method and using function parameters to generate questions based on the specific operation, we can maintain a clean and organized codebase while providing a consistent gaming experience across all operation types. This approach allows for easy expansion in the future if we want to add more operations or game modes without needing to rewrite the core game logic.

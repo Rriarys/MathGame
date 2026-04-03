@@ -3,6 +3,28 @@ namespace MathGame;
 // This class is only for storing minor extension methods that may be used across the project, to make the code cleaner and more organized. It can be expanded in the future as needed.
 public static class MinorExtensions
 {
+    public static int SelectDifficulty(string optionName)
+    {
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        TypeWriteLine($"You chose {optionName}, please select difficulty:");
+        TypeWriteLine("(1 - Easy, 2 - Medium, 3 - Hard)");
+        Console.ResetColor();
+        TypeWrite("\nEnter difficulty (1-3): ");
+
+        while (true)
+        {
+            string? input = Console.ReadLine()?.Trim();
+            Console.WriteLine();
+
+            if (int.TryParse(input, out int diff) && diff >= 1 && diff <= 3) // Check if the input is a valid integer between 1 and 3, representing the difficulty levels
+                return diff;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            TypeWriteLine("\nInvalid difficulty. Try again:\n");
+            Console.ResetColor();
+        }
+    }
+
+
     // CUSTOM TYPEWRITING METHODS
     // Custom methods for typewriting effect
     public static void TypeWrite(string text, int delay = 15)
