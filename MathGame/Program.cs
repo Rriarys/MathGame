@@ -30,6 +30,8 @@ TextDisplayMethods.PrintInformationMessage(infoText, welcomeText.Split('\n').Max
 
 TextDisplayMethods.PrintAuthorSignature(signatureText); // Print the author signature with a typewriting effect
 
+
+
 // =============================== MAIN PROGRAM ===============================
 while (true)
 {      
@@ -64,7 +66,7 @@ while (true)
                     TextDisplayMethods.PrintSeparator(); 
                     difficulty = MinorExtensions.SelectDifficulty("Addition game");
                     var (score, time) = operationTask.StartAdditionGame(difficulty);
-                    GamesHistory.History.Add($"{playerName} - Addition Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    GamesHistory.History.Add((playerName, "Addition game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;
                 }
             // -
@@ -73,7 +75,7 @@ while (true)
                     TextDisplayMethods.PrintSeparator();
                     difficulty = MinorExtensions.SelectDifficulty("Subtraction game");
                     var (score, time) = operationTask.StartSubtractionGame(difficulty);
-                    GamesHistory.History.Add($"{playerName} - Subtraction Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    GamesHistory.History.Add((playerName, "Subtraction game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;
                 } 
             // *
@@ -82,7 +84,7 @@ while (true)
                     TextDisplayMethods.PrintSeparator(); 
                     difficulty = MinorExtensions.SelectDifficulty("Multiplication game");
                     var (score, time) = operationTask.StartMultiplicationGame(difficulty);
-                    GamesHistory.History.Add($"{playerName} - Multiplication Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    GamesHistory.History.Add((playerName, "Multiplication game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;
                 } 
             // /
@@ -91,7 +93,7 @@ while (true)
                     TextDisplayMethods.PrintSeparator(); 
                     difficulty = MinorExtensions.SelectDifficulty("Division game");
                     var (score, time) = operationTask.StartDivisionGame(difficulty);
-                    GamesHistory.History.Add($"{playerName} - Division Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    GamesHistory.History.Add((playerName, "Division game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;
                 }
             // Random operation
@@ -100,7 +102,7 @@ while (true)
                     TextDisplayMethods.PrintSeparator(); 
                     difficulty = MinorExtensions.SelectDifficulty("Random operations game");
                     var (score, time) = operationTask.StartRandomOperationsGame(difficulty);
-                    GamesHistory.History.Add($"{playerName} - Random Operations Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    GamesHistory.History.Add((playerName, "Random operations game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;     
                 }
             // Change player
@@ -124,13 +126,21 @@ while (true)
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     if (!GamesHistory.History.Any())
                     {   
-                        Console.WriteLine("No games played yet.");
+                        Console.WriteLine("\nNo games played yet.");
+                        Console.ResetColor();
                         break;
                     }
 
-                    foreach (var i in GamesHistory.History)
+                    TextDisplayMethods.PrintSmallSeparator();
+
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    MinorExtensions.TypeWriteLine("\nGames History:\n\n");
+                    Console.WriteLine($"{"Player",-15} | {"Game",-15} | {"Diff",-5} | {"Score",-5} | {"Time(s)",-10}");
+                    Console.WriteLine(new string('-', 60));
+
+                    foreach (var game in GamesHistory.History)
                     {
-                        Console.WriteLine(i);
+                        Console.WriteLine($"{game.name.Cut(15),-15} | {game.game,-15} | {((Difficulty)game.diff).ToString(),-5} | {game.score,-5} | {game.time,-10:F2}");
                     }
 
                     Console.ResetColor();

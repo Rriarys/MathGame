@@ -3,6 +3,16 @@ namespace MathGame;
 // This class is only for storing minor extension methods that may be used across the project, to make the code cleaner and more organized. It can be expanded in the future as needed.
 public static class MinorExtensions
 {
+
+    // Method to cut a string to a specified maximum length
+    public static string Cut(this string value, int maxLength)
+    {
+        return value.Length <= maxLength 
+            ? value 
+            : value.Substring(0, maxLength);
+    }
+    
+    // Method to select difficulty level for the games
     public static int SelectDifficulty(string optionName)
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -58,7 +68,7 @@ public static class MinorExtensions
         for (int i = 0; i < 40; i++)
         {
             Console.Write($"\rLoading story of games... {spinner[i % spinner.Length]}");
-            Thread.Sleep(150);
+            Thread.Sleep(120);
         }
         TypeWriteLine("\rDone!".PadRight(30));
         Console.CursorVisible = true;
