@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace MathGame;
 
 public class OperationsTasks
@@ -36,6 +38,8 @@ Mix of all operations.
         Console.ForegroundColor = ConsoleColor.Magenta;
         MinorExtensions.TypeWrite(description);
         Console.ResetColor();
+
+        var stopwatch = Stopwatch.StartNew(); // Start the stopwatch to measure the elapsed time for the game session
 
         for (int i = 0; i < 5; i++)
         {
@@ -79,9 +83,9 @@ Mix of all operations.
                 TextDisplayMethods.PrintSmallSeparator();
             }
         }
-
+        stopwatch.Stop(); // Stop the stopwatch after the game session is completed
         Console.ForegroundColor = ConsoleColor.DarkBlue;
-        MinorExtensions.TypeWrite($"Game Over! Your final score is: {score}/5\n");
+        MinorExtensions.TypeWrite($"Game Over! Your final score is: {score}/5. Time elapsed: {stopwatch.Elapsed.TotalSeconds:F2} seconds.\n");
         Console.ResetColor();
     }
 
