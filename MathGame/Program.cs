@@ -59,74 +59,100 @@ while (true)
         switch (playerChoice)
         {   
             // +
-            case "1": 
-            TextDisplayMethods.PrintSeparator(); 
-            difficulty = MinorExtensions.SelectDifficulty("Addition game");
-            operationTask.StartAdditionGame(difficulty); 
-            TextDisplayMethods.PrintMenu(menuText); break;
-
+            case "1":
+                {
+                    TextDisplayMethods.PrintSeparator(); 
+                    difficulty = MinorExtensions.SelectDifficulty("Addition game");
+                    var (score, time) = operationTask.StartAdditionGame(difficulty);
+                    GamesHistory.History.Add($"{playerName} - Addition Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    TextDisplayMethods.PrintMenu(menuText); break;
+                }
             // -
-            case "2": 
-            TextDisplayMethods.PrintSeparator();
-            difficulty = MinorExtensions.SelectDifficulty("Subtraction game");
-            operationTask.StartSubtractionGame(difficulty); 
-            TextDisplayMethods.PrintMenu(menuText); break;
-
+            case "2":
+                {
+                    TextDisplayMethods.PrintSeparator();
+                    difficulty = MinorExtensions.SelectDifficulty("Subtraction game");
+                    var (score, time) = operationTask.StartSubtractionGame(difficulty);
+                    GamesHistory.History.Add($"{playerName} - Subtraction Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    TextDisplayMethods.PrintMenu(menuText); break;
+                } 
             // *
-            case "3": 
-            TextDisplayMethods.PrintSeparator(); 
-            difficulty = MinorExtensions.SelectDifficulty("Multiplication game");
-            operationTask.StartMultiplicationGame(difficulty); 
-            TextDisplayMethods.PrintMenu(menuText); break;
-
+            case "3":
+                {
+                    TextDisplayMethods.PrintSeparator(); 
+                    difficulty = MinorExtensions.SelectDifficulty("Multiplication game");
+                    var (score, time) = operationTask.StartMultiplicationGame(difficulty);
+                    GamesHistory.History.Add($"{playerName} - Multiplication Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    TextDisplayMethods.PrintMenu(menuText); break;
+                } 
             // /
-            case "4": 
-            TextDisplayMethods.PrintSeparator(); 
-            difficulty = MinorExtensions.SelectDifficulty("Division game");
-            operationTask.StartDivisionGame(difficulty); 
-            TextDisplayMethods.PrintMenu(menuText); break;
-
+            case "4":
+                {
+                    TextDisplayMethods.PrintSeparator(); 
+                    difficulty = MinorExtensions.SelectDifficulty("Division game");
+                    var (score, time) = operationTask.StartDivisionGame(difficulty);
+                    GamesHistory.History.Add($"{playerName} - Division Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    TextDisplayMethods.PrintMenu(menuText); break;
+                }
             // Random operation
-            case "5": 
-            TextDisplayMethods.PrintSeparator(); 
-            difficulty = MinorExtensions.SelectDifficulty("Random operations game");
-            operationTask.StartRandomOperationsGame(difficulty); 
-            TextDisplayMethods.PrintMenu(menuText); break;
-            
+            case "5":
+                {
+                    TextDisplayMethods.PrintSeparator(); 
+                    difficulty = MinorExtensions.SelectDifficulty("Random operations game");
+                    var (score, time) = operationTask.StartRandomOperationsGame(difficulty);
+                    GamesHistory.History.Add($"{playerName} - Random Operations Game - {difficulty} - Score: {score}, Time: {time:F2} seconds");
+                    TextDisplayMethods.PrintMenu(menuText); break;     
+                }
             // Change player
-            case "8": 
-                TextDisplayMethods.PrintSeparator();
-
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                MinorExtensions.PlayerNameChangingLoadingAnimation();
-                Console.ResetColor();
-                isChangingPlayer = true; // Set the flag to indicate that the player session is being changed
-                break;
-            
+            case "8":
+                {
+                    TextDisplayMethods.PrintSeparator();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    MinorExtensions.PlayerNameChangingLoadingAnimation();
+                    Console.ResetColor();
+                    isChangingPlayer = true; // Set the flag to indicate that the player session is being changed
+                    break;
+                }
             // Story of games. Not implemented
-            case "9": 
-                TextDisplayMethods.PrintSeparator();
+            case "9":
+                {
+                    TextDisplayMethods.PrintSeparator();
 
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                MinorExtensions.StoryShowLoadingAnimation();
-                Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    MinorExtensions.StoryShowLoadingAnimation();
 
-                TextDisplayMethods.PrintMenu(menuText);
-                break;
-            
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    if (!GamesHistory.History.Any())
+                    {   
+                        Console.WriteLine("No games played yet.");
+                        break;
+                    }
+
+                    foreach (var i in GamesHistory.History)
+                    {
+                        Console.WriteLine(i);
+                    }
+
+                    Console.ResetColor();
+                    TextDisplayMethods.PrintMenu(menuText);
+                    break;
+                }      
             // Exit the program
             case "0":
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                MinorExtensions.TypeWriteLine($"\nThank you, {playerName}, for playing the Math Game! Goodbye!");
-                Console.ResetColor();
-                return; // Exit the program
-
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    MinorExtensions.TypeWriteLine($"\nThank you, {playerName}, for playing the Math Game! Goodbye!");
+                    Console.ResetColor();
+                    return; // Exit the program
+                }
             // Wrong input
             default:
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                MinorExtensions.TypeWriteLine("\nInvalid choice. Please enter a valid number.");
-                Console.ResetColor();
-                continue; // Prompt the user again without breaking the loop
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    MinorExtensions.TypeWriteLine("\nInvalid choice. Please enter a valid number.");
+                    Console.ResetColor();
+                    continue; // Prompt the user again without breaking the loop
+                }
         }
 
         if (isChangingPlayer) // If the player session is being changed, break the inner loop to return to the outer loop and prompt for a new player name

@@ -2,6 +2,7 @@ using System.Diagnostics;
 
 namespace MathGame;
 
+// Strategy pattern
 public class OperationsTasks
 {
     const string additionDescription = @"Welcome to the Addition Game!
@@ -26,7 +27,7 @@ Mix of all operations.
 ";
 
     // =============================== CORE ===============================
-    private void RunGame(
+    private (int score, double time) RunGame(
         Func<Random, int, (int num1, int num2, string symbol, int correctAnswer)> questionGenerator, // Function parameter that generates a question based on the provided random number generator and difficulty level, returning a tuple containing the two numbers, the operation symbol, and the correct answer
         string description,
         int difficulty
@@ -87,6 +88,8 @@ Mix of all operations.
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         MinorExtensions.TypeWrite($"Game Over! Your final score is: {score}/5. Time elapsed: {stopwatch.Elapsed.TotalSeconds:F2} seconds.\n");
         Console.ResetColor();
+
+        return (score, stopwatch.Elapsed.TotalSeconds);
     }
 
     // =============================== DIFFICULTY ===============================
@@ -149,30 +152,30 @@ Mix of all operations.
     }
 
     // =============================== REALISATIONS ===============================
-    public void StartAdditionGame(int difficulty)
+    public (int score, double time) StartAdditionGame(int difficulty)
     {
-        RunGame(GenerateAddition, additionDescription, difficulty);
+        return RunGame(GenerateAddition, additionDescription, difficulty);
     }
 
-    public void StartSubtractionGame(int difficulty)
+    public (int score, double time) StartSubtractionGame(int difficulty)
     {
-        RunGame(GenerateSubtraction, subtractionDescription, difficulty);
+        return RunGame(GenerateSubtraction, subtractionDescription, difficulty);
     }
 
-    public void StartMultiplicationGame(int difficulty)
+    public (int score, double time) StartMultiplicationGame(int difficulty)
     {
-        RunGame(GenerateMultiplication, multiplicationDescription, difficulty);
+        return RunGame(GenerateMultiplication, multiplicationDescription, difficulty);
     }
 
-    public void StartDivisionGame(int difficulty)
+    public (int score, double time) StartDivisionGame(int difficulty)
     {
-        RunGame(GenerateDivision, divisionDescription, difficulty);
+        return RunGame(GenerateDivision, divisionDescription, difficulty);
     }
 
     // =============================== RANDOM OPERATIONS ===============================
-    public void StartRandomOperationsGame(int difficulty)
+    public (int score, double time) StartRandomOperationsGame(int difficulty)
     {
-        RunGame(
+        return RunGame(
             (random, difficulty) =>
             {
                 int operationType = random.Next(1, 5);
@@ -191,5 +194,3 @@ Mix of all operations.
         );
     }
 }
-
-// Strategy pattern is used to create a flexible and reusable game structure that can easily accommodate different types of math operations (addition, subtraction, multiplication, division) without duplicating code. By defining a common game logic in the RunGame method and using function parameters to generate questions based on the specific operation, we can maintain a clean and organized codebase while providing a consistent gaming experience across all operation types. This approach allows for easy expansion in the future if we want to add more operations or game modes without needing to rewrite the core game logic.
