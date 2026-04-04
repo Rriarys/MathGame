@@ -1,0 +1,44 @@
+name: Build and Release MathGame
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger on tags starting with 'v', e.g., v1.0.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Build for Windows and Linux (64-bit)
+        target: [win-x64, linux-x64]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x' # Using .NET 10 SDK
+
+      - name: Publish
+        # Create a self-contained, single-file executable, trimming unused code
+        run: |
+          dotnet publish MathGame/MathGame.csproj -c Release -r ${{ matrix.target }} --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish/${{ matrix.target }}
+
+      - name: Zip Artifacts
+        # Pack the output into zip archives for easy downloading
+        run: |
+          cd ./publish/${{ matrix.target }}
+          zip -r ../../${{ matrix.target }}.zip .
+
+      - name: Create GitHub Release
+        # Create a new Release entry and attach the zipped binaries
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            win-x64.zip
+            linux-x64.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
