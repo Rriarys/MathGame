@@ -15,14 +15,15 @@ public static class MinorExtensions
     // Method to select difficulty level for the games
     public static int SelectDifficulty(string optionName)
     {
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.Magenta;
         TypeWriteLine($"You chose {optionName}, please select difficulty:");
         TypeWriteLine("(1 - Easy, 2 - Medium, 3 - Hard, any other key - Random difficulty)");
-        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.White;
         TypeWrite("\nEnter difficulty (1-3): ");
-
         while (true)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             string? input = Console.ReadLine()?.Trim();
             Console.WriteLine();
 
@@ -30,8 +31,9 @@ public static class MinorExtensions
                 return diff;
             else
             {
+                Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                TypeWriteLine("\nRandom difficulty selected.\n");
+                TypeWriteLine("Random difficulty selected.\n");
                 Console.ResetColor();
                 return new Random().Next(1, 4); // Return a random difficulty level between 1 and 3 if the input is invalid, ensuring that the game can proceed with a randomly selected difficulty level
             }
@@ -43,19 +45,38 @@ public static class MinorExtensions
     // Custom methods for typewriting effect
     public static void TypeWrite(string text, int delay = 15)
     {   
-        foreach (char c in text)
+        Console.CursorVisible = false;
+    foreach (char c in text)
         {
-            Console.CursorVisible = false;
-            Console.Write(c);
+            if (c == '\n')
+            {
+                int remainingSpace = Console.WindowWidth - Console.CursorLeft;
+                if (remainingSpace > 0)
+                {
+                    Console.Write(new string(' ', remainingSpace));
+                }
+                Console.Write(c);
+            }
+            else
+            {
+                Console.Write(c);
+            }
             Thread.Sleep(delay);
-            Console.CursorVisible = true;
         }
+        Console.CursorVisible = true;
     }
 
     // Method to typewrite a line of text with a newline at the end
     public static void TypeWriteLine(string text, int delay = 15)
     {
         TypeWrite(text, delay);
+
+        int remainingSpace = Console.WindowWidth - Console.CursorLeft;
+        if (remainingSpace > 0)
+            {
+                Console.Write(new string(' ', remainingSpace));
+            }
+
         Console.WriteLine();
     }
 
@@ -64,6 +85,8 @@ public static class MinorExtensions
     public static void StoryShowLoadingAnimation()
     {   
         Console.CursorVisible = false;
+        Console.Write(new string(' ', Console.WindowWidth)); 
+        Console.SetCursorPosition(0, Console.CursorTop);
         string[] spinner = { "|", "/", "-", "\\" };
         for (int i = 0; i < 40; i++)
         {
@@ -77,6 +100,8 @@ public static class MinorExtensions
     public static void PlayerNameChangingLoadingAnimation()
     {   
         Console.CursorVisible = false;
+        Console.Write(new string(' ', Console.WindowWidth)); 
+        Console.SetCursorPosition(0, Console.CursorTop);
         string[] spinner = { "|", "/", "-", "\\" };
         for (int i = 0; i < 40; i++)
         {   

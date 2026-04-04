@@ -7,6 +7,7 @@ public static class TextDisplayMethods
     public static void PrintSeparator()
     {
         Console.WriteLine();
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine(new string('=', Console.WindowWidth));
         Console.ResetColor();
@@ -17,6 +18,7 @@ public static class TextDisplayMethods
     public static void PrintSmallSeparator()
     {   
         Console.WriteLine();
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine(new string('-', Console.WindowWidth));
         Console.ResetColor();
@@ -31,6 +33,7 @@ public static class TextDisplayMethods
             .Where(l => !string.IsNullOrWhiteSpace(l))
             .ToArray();
 
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.Cyan;
 
         int maxLength = welcomeLines.Max(l => l.Length); // Calculate the maximum length of the lines in the welcome text to help with centering the text in the console window
@@ -47,6 +50,7 @@ public static class TextDisplayMethods
     public static void PrintInformationMessage(string infoText, int maxLength)
     {
         var wrappedInfo = MinorExtensions.WrapText(infoText.Trim(), maxLength - 5); // Wrap the information text to fit within the console window, using the maximum line length from the welcome text minus some padding for better readability
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.DarkCyan;
 
         foreach (var line in wrappedInfo)
@@ -63,6 +67,7 @@ public static class TextDisplayMethods
     public static void PrintAuthorSignature(string signatureText)
     {
         int signaturePad = (Console.WindowWidth - signatureText.Length) / 2;
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         MinorExtensions.TypeWriteLine(new string(' ', signaturePad) + signatureText);
         Console.ResetColor();
@@ -72,6 +77,7 @@ public static class TextDisplayMethods
     public static void PrintMenu(string menuText)
     {
         PrintSeparator();
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.Magenta;
         MinorExtensions.TypeWriteLine("Choose operation for challenge by entering the corresponding number:\n");
         Console.ResetColor();
@@ -91,6 +97,7 @@ public static class TextDisplayMethods
         int leftPad = (Console.WindowWidth - totalWidth) / 2; // Calculate the left padding to center the menu box in the console window
         if (leftPad < 0) leftPad = 0;
 
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.Blue;
 
         // Top border of the menu box
