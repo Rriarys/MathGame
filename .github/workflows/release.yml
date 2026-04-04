@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*' # Trigger on tags starting with 'v', e.g., v1.0.0
 
+permissions:
+  contents: write # Allow the workflow to create releases and upload assets
+
 jobs:
   release:
     runs-on: ubuntu-latest
