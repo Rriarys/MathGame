@@ -4,12 +4,21 @@ public static class NameKeeper
 {
     public static string GetPlayerName()
     {
-        MinorExtensions.TypeWrite(GetNamePrompt());
-        return ReadUserInput();
+        MinorExtensions.TypeWrite(GetNameAskPrompt());
+
+        string playerName = ReadUserInput();
+        
+        GetPlayerGreating(playerName);
+
+        return playerName;
     }
-    public static string GetNamePrompt() =>
+    public static string GetNameAskPrompt() =>
         "\nPlease enter your name: ";
 
     public static string ReadUserInput() => 
          Console.ReadLine()?.Trim() ?? "Player"; // If the user doesn't enter a name, default to "Player"
+
+    public static void GetPlayerGreating(string playerName) =>
+        MinorExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!");
+
 }
