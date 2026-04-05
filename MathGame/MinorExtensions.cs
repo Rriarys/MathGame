@@ -11,35 +11,6 @@ public static class MinorExtensions
             ? value 
             : value.Substring(0, maxLength);
     }
-    
-    // Method to select difficulty level for the games
-    public static int SelectDifficulty(string optionName)
-    {
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        TypeWriteLine($"You chose {optionName}, please select difficulty:");
-        TypeWriteLine("(1 - Easy, 2 - Medium, 3 - Hard, any other key - Random difficulty)");
-        Console.ForegroundColor = ConsoleColor.White;
-        TypeWrite("\nEnter difficulty (1-3): ");
-        while (true)
-        {
-            Console.ForegroundColor = ConsoleColor.White;
-            string? input = Console.ReadLine()?.Trim();
-            Console.WriteLine();
-
-            if (int.TryParse(input, out int diff) && diff >= 1 && diff <= 3) // Check if the input is a valid integer between 1 and 3, representing the difficulty levels
-                return diff;
-            else
-            {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                TypeWriteLine("Random difficulty selected.\n");
-                Console.ResetColor();
-                return new Random().Next(1, 4); // Return a random difficulty level between 1 and 3 if the input is invalid, ensuring that the game can proceed with a randomly selected difficulty level
-            }
-        }
-    }
-
 
     // CUSTOM TYPEWRITING METHODS
     // Custom methods for typewriting effect

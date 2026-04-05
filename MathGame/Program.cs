@@ -82,7 +82,7 @@ while (true)
             case "1":
                 {
                     TextDisplayMethods.PrintSeparator(); 
-                    difficulty = MinorExtensions.SelectDifficulty("Addition game");
+                    difficulty = DifficultySelector.SelectDifficulty("Addition game");
                     var (score, time) = operationTask.StartAdditionGame(difficulty);
                     GamesHistory.History.Add((playerName, "Addition game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;
@@ -91,7 +91,7 @@ while (true)
             case "2":
                 {
                     TextDisplayMethods.PrintSeparator();
-                    difficulty = MinorExtensions.SelectDifficulty("Subtraction game");
+                    difficulty = DifficultySelector.SelectDifficulty("Subtraction game");
                     var (score, time) = operationTask.StartSubtractionGame(difficulty);
                     GamesHistory.History.Add((playerName, "Subtraction game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;
@@ -100,7 +100,7 @@ while (true)
             case "3":
                 {
                     TextDisplayMethods.PrintSeparator(); 
-                    difficulty = MinorExtensions.SelectDifficulty("Multiplication game");
+                    difficulty = DifficultySelector.SelectDifficulty("Multiplication game");
                     var (score, time) = operationTask.StartMultiplicationGame(difficulty);
                     GamesHistory.History.Add((playerName, "Multiplication game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;
@@ -109,7 +109,7 @@ while (true)
             case "4":
                 {
                     TextDisplayMethods.PrintSeparator(); 
-                    difficulty = MinorExtensions.SelectDifficulty("Division game");
+                    difficulty = DifficultySelector.SelectDifficulty("Division game");
                     var (score, time) = operationTask.StartDivisionGame(difficulty);
                     GamesHistory.History.Add((playerName, "Division game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;
@@ -118,7 +118,7 @@ while (true)
             case "5":
                 {
                     TextDisplayMethods.PrintSeparator(); 
-                    difficulty = MinorExtensions.SelectDifficulty("Random operations game");
+                    difficulty = DifficultySelector.SelectDifficulty("Random operations game");
                     var (score, time) = operationTask.StartRandomOperationsGame(difficulty);
                     GamesHistory.History.Add((playerName, "Random operations game", difficulty, score, time));
                     TextDisplayMethods.PrintMenu(menuText); break;     
