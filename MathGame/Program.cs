@@ -91,7 +91,7 @@ try
                         TextDisplayMethods.PrintSeparator();
 
                         MinorExtensions.PlayerNameChangingLoadingAnimation();
-                 
+                    
                         isChangingPlayer = true; // Set the flag to indicate that the player session is being changed
                         break;
                     }
@@ -140,9 +140,9 @@ try
 
             if (isChangingPlayer) // If the player session is being changed, break the inner loop to return to the outer loop and prompt for a new player name
                 break;
-        }
+        }         
     }
-}
+}   
 finally
 {
     // Restore the original colors

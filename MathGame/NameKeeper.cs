@@ -2,7 +2,7 @@ namespace MathGame;
 
 public static class NameKeeper
 {
-    public static string GetPlayerName()
+    public static string GetPlayerName() 
     {
         MinorExtensions.TypeWrite(GetNameAskPrompt());
 
