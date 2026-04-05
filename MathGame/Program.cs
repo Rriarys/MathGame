@@ -13,35 +13,12 @@ Console.Clear();
 
 try
 {
-const string welcomeText = @"
- __  __       _   _        ____                      
-|  \/  | __ _| |_| |__    / ___| __ _ _ __ ___   ___ 
-| |\/| |/ _` | __| '_ \  | |  _ / _` | '_ ` _ \ / _ \
-| |  | | (_| | |_| | | | | |_| | (_| | | | | | |  __/
-|_|  |_|\__,_|\__|_| |_|  \____|\__,_|_| |_| |_|\___|
-=====================================================
-";
-
-const string infoText = "Welcome to the Math Game! This is a fun and interactive game designed to help you practice and improve your math skills.";
-
-const string signatureText = "Made by Rriarys";
-
-const string menuText = @"
-1. Addition
-2. Subtraction
-3. Multiplication
-4. Division
-5. Random operations
-8. Change player session
-9. Story of games
-0. Exit";
-
 // Print the welcome message, information message, and author signature with typewriting effects
-TextDisplayMethods.PrintWelcomeMessage(welcomeText); // Print the welcome message with a typewriting effect
+TextDisplayMethods.PrintWelcomeMessage(TextsHandler.welcomeText); // Print the welcome message with a typewriting effect
 
-TextDisplayMethods.PrintInformationMessage(infoText, welcomeText.Split('\n').Max(l => l.Length)); // Print the info message with a typewriting effect
+TextDisplayMethods.PrintInformationMessage(TextsHandler.infoText, TextsHandler.welcomeText.Split('\n').Max(l => l.Length)); // Print the info message with a typewriting effect
 
-TextDisplayMethods.PrintAuthorSignature(signatureText); // Print the author signature with a typewriting effect
+TextDisplayMethods.PrintAuthorSignature(TextsHandler.signatureText); // Print the author signature with a typewriting effect
 
 
 
@@ -51,19 +28,18 @@ while (true)
     TextDisplayMethods.PrintSeparator(); // Print a separator line to visually separate different sections of the console output
 
     bool isChangingPlayer = false; // Flag to track if the player session is being changed
-    Console.BackgroundColor = ConsoleColor.Black;
 
-    Console.Write(new string(' ', Console.WindowWidth)); 
-    Console.SetCursorPosition(0, Console.CursorTop);
-    MinorExtensions.TypeWrite("Please enter your name: ");
-    string playerName = Console.ReadLine()?.Trim() ?? "Player"; // If the user doesn't enter a name, default to "Player"
+    // Console.Write(new string(' ', Console.WindowWidth)); 
+    // Console.SetCursorPosition(0, Console.CursorTop);
+
+    string playerName = NameKeeper.GetPlayerName(); // Get the player's name 
 
     Console.ForegroundColor = ConsoleColor.Magenta;
     MinorExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!");
     Console.ResetColor();
 
     // Print the menu options for the user to choose from with a typewriting effect
-    TextDisplayMethods.PrintMenu(menuText);
+    TextDisplayMethods.PrintMenu(TextsHandler.menuText);
 
     OperationsTasks operationTask = new OperationsTasks(); // Create an instance of OperationsTasks to call the game methods
 
@@ -85,7 +61,7 @@ while (true)
                     difficulty = DifficultySelector.SelectDifficulty("Addition game");
                     var (score, time) = operationTask.StartAdditionGame(difficulty);
                     GamesHistory.History.Add((playerName, "Addition game", difficulty, score, time));
-                    TextDisplayMethods.PrintMenu(menuText); break;
+                    TextDisplayMethods.PrintMenu(TextsHandler.menuText); break;
                 }
             // -
             case "2":
@@ -94,7 +70,7 @@ while (true)
                     difficulty = DifficultySelector.SelectDifficulty("Subtraction game");
                     var (score, time) = operationTask.StartSubtractionGame(difficulty);
                     GamesHistory.History.Add((playerName, "Subtraction game", difficulty, score, time));
-                    TextDisplayMethods.PrintMenu(menuText); break;
+                    TextDisplayMethods.PrintMenu(TextsHandler.menuText); break;
                 } 
             // *
             case "3":
@@ -103,7 +79,7 @@ while (true)
                     difficulty = DifficultySelector.SelectDifficulty("Multiplication game");
                     var (score, time) = operationTask.StartMultiplicationGame(difficulty);
                     GamesHistory.History.Add((playerName, "Multiplication game", difficulty, score, time));
-                    TextDisplayMethods.PrintMenu(menuText); break;
+                    TextDisplayMethods.PrintMenu(TextsHandler.menuText); break;
                 } 
             // /
             case "4":
@@ -112,7 +88,7 @@ while (true)
                     difficulty = DifficultySelector.SelectDifficulty("Division game");
                     var (score, time) = operationTask.StartDivisionGame(difficulty);
                     GamesHistory.History.Add((playerName, "Division game", difficulty, score, time));
-                    TextDisplayMethods.PrintMenu(menuText); break;
+                    TextDisplayMethods.PrintMenu(TextsHandler.menuText); break;
                 }
             // Random operation
             case "5":
@@ -121,7 +97,7 @@ while (true)
                     difficulty = DifficultySelector.SelectDifficulty("Random operations game");
                     var (score, time) = operationTask.StartRandomOperationsGame(difficulty);
                     GamesHistory.History.Add((playerName, "Random operations game", difficulty, score, time));
-                    TextDisplayMethods.PrintMenu(menuText); break;     
+                    TextDisplayMethods.PrintMenu(TextsHandler.menuText); break;     
                 }
             // Change player
             case "8":
@@ -168,7 +144,7 @@ while (true)
                     }
 
                     Console.ResetColor();
-                    TextDisplayMethods.PrintMenu(menuText);
+                    TextDisplayMethods.PrintMenu(TextsHandler.menuText);
                     break;
                 }      
             // Exit the program
