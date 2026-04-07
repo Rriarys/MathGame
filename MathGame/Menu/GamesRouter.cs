@@ -1,3 +1,6 @@
+using MathGame.History;
+using MathGame.Menu;
+
 namespace MathGame;
 
 public static class GamesRouter
@@ -12,7 +15,8 @@ public static void Run(int playerMenuChoice, int difficulty)
             case 1:
                 {
                     TextDisplayMethods.PrintSeparator();
-                    var (score, time) = operationTask.StartSubtractionGame(difficulty);
+                    var (score, time) = operationTask.StartAdditionGame(difficulty);
+                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
                     break;
                 }
             // -
@@ -20,6 +24,7 @@ public static void Run(int playerMenuChoice, int difficulty)
                 {
                     TextDisplayMethods.PrintSeparator();
                     var (score, time) = operationTask.StartSubtractionGame(difficulty);
+                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
                     break;
                 } 
             // *
@@ -27,6 +32,7 @@ public static void Run(int playerMenuChoice, int difficulty)
                 {
                     TextDisplayMethods.PrintSeparator(); 
                     var (score, time) = operationTask.StartMultiplicationGame(difficulty);
+                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
                     break;
                 } 
             // /
@@ -34,6 +40,7 @@ public static void Run(int playerMenuChoice, int difficulty)
                 {
                     TextDisplayMethods.PrintSeparator(); 
                     var (score, time) = operationTask.StartDivisionGame(difficulty);
+                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
                     break;
                 }
             // Random operation
@@ -41,6 +48,7 @@ public static void Run(int playerMenuChoice, int difficulty)
                 {
                     TextDisplayMethods.PrintSeparator(); 
                     var (score, time) = operationTask.StartRandomOperationsGame(difficulty);
+                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
                     break;     
                 }
         }

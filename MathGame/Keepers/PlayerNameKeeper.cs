@@ -15,7 +15,7 @@ public static class PlayerNameKeeper
         return playerName;
     }
     public static string GetNameAskPrompt() =>
-        "\nPlease enter your name: ";
+        "Please enter your name: ";
 
     public static string ReadUserInput() => 
          Console.ReadLine()?.Trim() ?? "Player"; // If the user doesn't enter a name, default to "Player"

@@ -4,7 +4,6 @@
 var (originalBg, originalFg) = (Console.BackgroundColor, Console.ForegroundColor);
 // Initialize the console with a black background and white foreground for better look and readability of the game interface
 Console.BackgroundColor = ConsoleColor.Black;
-Console.ForegroundColor = ConsoleColor.White;
 // Clear the console to apply the new background color and provide a clean slate for the game interface
 Console.Clear();
 
