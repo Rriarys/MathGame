@@ -12,9 +12,9 @@ public static class DifficultySelector
     }
 
     public static string GetDifficultyPrompt(string gameName) =>
-        $"You choiced {gameName} game" +
-        "Now choose difficulty:\n" +
-        "(1 - Easy, 2 - Medium, 3 - Hard, any other key - Random difficulty)\n\n" +
+        $"\nYou choiced {gameName} game.\n" +
+        "\nNow choose difficulty:\n" +
+        "\n(1 - Easy, 2 - Medium, 3 - Hard, any other key - Random difficulty)\n\n" +
         "Enter difficulty (1-3): ";
 
     public static int ReadUserInput() =>

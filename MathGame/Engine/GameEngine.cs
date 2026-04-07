@@ -8,9 +8,11 @@ public static class GameEngine
     {
         PlayerNameKeeper.GetPlayerName(); // Get the player's name 
 
-        MenuPrinter.Print(); // Print the menu
-
-        PlayerChoiceRouter.Run(PlayerMenuChoiseKeeper.GetPlayerMenuChoice()); // Get the player's menu choice
+        while (true)
+        {
+            MenuPrinter.Print(); // Print the menu
+            PlayerChoiceRouter.Run(PlayerMenuChoiseKeeper.GetPlayerMenuChoice()); // Get the player's menu choice
+        }
 
     }
 }

@@ -43,6 +43,5 @@ public class MenuPrinter
         // Bottom border of the menu box
         Console.WriteLine(new string(' ', leftPad) +
             "╚" + new string('═', contentWidth) + "╝");
-        Console.ResetColor();
     }
 }

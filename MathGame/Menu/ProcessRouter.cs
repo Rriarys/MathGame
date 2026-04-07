@@ -31,13 +31,12 @@ public static class ProcessRouter
                     {
                         Console.WriteLine($"{game.name.Cut(15),-15} | {game.game.Cut(15),-15} | {((Difficulty)game.diff).ToString(),-5} | {game.score,-5} | {game.time,-10:F2}");
                     }
-
-                    MenuPrinter.Print();
+                    
                     break;
 
             case 0:
                 MinorExtensions.TypeWriteLine($"\nThank you, {PlayerNameKeeper.playerName}, for playing the Math Game! Goodbye!");
-                Thread.Sleep(200);
+                Thread.Sleep(300);
                 Environment.Exit(0); // Exit the program
                 break;
         }
