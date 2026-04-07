@@ -2,7 +2,7 @@ namespace MathGame;
 
 public static class TextsHandler
 {
-public const string logoText = @"
+    public const string logoText = @"
  __  __       _   _        ____                      
 |  \/  | __ _| |_| |__    / ___| __ _ _ __ ___   ___ 
 | |\/| |/ _` | __| '_ \  | |  _ / _` | '_ ` _ \ / _ \
@@ -11,11 +11,11 @@ public const string logoText = @"
 =====================================================
 ";
 
-public const string infoText = "Welcome to the Math Game! This is a fun and interactive game designed to help you practice and improve your math skills.";
+    public const string infoText = "Welcome to the Math Game! This is a fun and interactive game designed to help you practice and improve your math skills.";
 
-public const string signatureText = "Made by Rriarys";
+    public const string signatureText = "Made by Rriarys";
 
-public const string menuText = @"
+    public const string menuText = @"
 1. Addition
 2. Subtraction
 3. Multiplication
@@ -25,4 +25,29 @@ public const string menuText = @"
 9. Story of games
 0. Exit";
 
+    public const string additionDescription = @"
+Welcome to the Addition Game!
+Calculate the sum of two numbers.
+
+";
+    public const string subtractionDescription = @"
+Welcome to the Subtraction Game!
+Calculate the difference between two numbers.
+
+";
+    public const string multiplicationDescription = @"
+Welcome to the Multiplication Game!
+Calculate the product of two numbers.
+
+";
+    public const string divisionDescription = @"
+Welcome to the Division Game!
+Calculate the quotient of two numbers.
+
+";
+    public const string randomOperationsDescription = @"
+Welcome to the Random Operations Game!
+Mix of all operations.
+
+";
 }

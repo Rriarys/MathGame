@@ -1,3 +1,4 @@
+using System.IO.Pipelines;
 using MathGame.Menu;
 
 namespace MathGame;
@@ -7,12 +8,16 @@ public static class DifficultySelector
     public static int SelectDifficulty(string gameName)
     {   
         MinorExtensions.TypeWrite(GetDifficultyPrompt(gameName));
-        
-        return ValidateDifficulty(ReadUserInput());
+
+        int result = ValidateDifficulty(ReadUserInput());
+
+        MinorExtensions.TypeWrite(GetDifficultyPromptResult(result));
+
+        return result;
     }
 
     public static string GetDifficultyPrompt(string gameName) =>
-        $"\nYou choiced {gameName} game.\n" +
+        $"You choiced {gameName} game.\n" +
         "\nNow choose difficulty:\n" +
         "\n(1 - Easy, 2 - Medium, 3 - Hard, any other key - Random difficulty)\n\n" +
         "Enter difficulty (1-3): ";
@@ -22,4 +27,11 @@ public static class DifficultySelector
 
     public static int ValidateDifficulty(int userInput) =>
         userInput is >= 1 and <= 3 ? userInput : Random.Shared.Next(1, 4);
+
+    public static string GetDifficultyPromptResult(int result)
+    {
+        Difficulty selectedDifficulty = (Difficulty)result;
+
+        return $"\nYou choiced {selectedDifficulty} difficulty.\n";
+    }
 }

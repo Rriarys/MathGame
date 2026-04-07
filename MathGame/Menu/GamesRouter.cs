@@ -1,3 +1,4 @@
+using MathGame.Engine;
 using MathGame.History;
 using MathGame.Menu;
 
@@ -5,52 +6,34 @@ namespace MathGame;
 
 public static class GamesRouter
 {
-public static void Run(int playerMenuChoice, int difficulty)    
-{             
-        OperationsTasks operationTask = new OperationsTasks(); // Create an instance of OperationsTasks to call the game methods
+    private static readonly GameSession _gameSession = new();
 
-        switch (playerMenuChoice)
-        {   
-            // +
-            case 1:
-                {
-                    TextDisplayMethods.PrintSeparator();
-                    var (score, time) = operationTask.StartAdditionGame(difficulty);
-                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
-                    break;
-                }
-            // -
-            case 2:
-                {
-                    TextDisplayMethods.PrintSeparator();
-                    var (score, time) = operationTask.StartSubtractionGame(difficulty);
-                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
-                    break;
-                } 
-            // *
-            case 3:
-                {
-                    TextDisplayMethods.PrintSeparator(); 
-                    var (score, time) = operationTask.StartMultiplicationGame(difficulty);
-                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
-                    break;
-                } 
-            // /
-            case 4:
-                {
-                    TextDisplayMethods.PrintSeparator(); 
-                    var (score, time) = operationTask.StartDivisionGame(difficulty);
-                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
-                    break;
-                }
-            // Random operation
-            case 5:
-                {
-                    TextDisplayMethods.PrintSeparator(); 
-                    var (score, time) = operationTask.StartRandomOperationsGame(difficulty);
-                    GamesHistoryIO.SaveGame(PlayerNameKeeper.playerName, GamesNamesList.Games[playerMenuChoice], difficulty, score, time);
-                    break;     
-                }
-        }
+    // Main entry point for starting a game from the menu selection
+    public static void Run(int menuChoice, int difficulty)    
+    {             
+        string gameDescription = GetDescription(menuChoice);
+        
+        // Execute the game and capture results
+        var (score, time) = _gameSession.Start(menuChoice, difficulty, gameDescription);
+
+        // Persistent storage of the game outcome
+        GamesHistoryIO.SaveGame(
+            PlayerNameKeeper.playerName, 
+            GamesNamesList.Games[menuChoice - 1], 
+            difficulty, 
+            score, 
+            time.ToString(@"m'm 's's 'fff'ms'")
+        );
     }
+
+    // Maps the numeric menu choice to the corresponding game description text
+    private static string GetDescription(int choice) => choice switch 
+    {
+        1 => TextsHandler.additionDescription,
+        2 => TextsHandler.subtractionDescription,
+        3 => TextsHandler.multiplicationDescription,
+        4 => TextsHandler.divisionDescription,
+        5 => TextsHandler.randomOperationsDescription,
+        _ => string.Empty
+    };
 }

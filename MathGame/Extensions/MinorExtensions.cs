@@ -7,9 +7,8 @@ public static class MinorExtensions
     // Method to cut a string to a specified maximum length
     public static string Cut(this string value, int maxLength)
     {
-        return value.Length <= maxLength 
-            ? value 
-            : value.Substring(0, maxLength);
+        if (value.Length <= maxLength) return value;
+        return value.Substring(0, maxLength - 3) + "...";
     }
 
     // CUSTOM TYPEWRITING METHODS
