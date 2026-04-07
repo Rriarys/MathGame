@@ -1,6 +1,6 @@
 namespace MathGame.Menu;
 
-public class MenuTyper
+public class MenuPrinter
 {
     public static void Print() =>
         DrawMenu(TextsHandler.menuText); // PrintMenu(TextsHandler.menuText); // Print the menu with a typewriting effect  

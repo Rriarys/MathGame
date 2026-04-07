@@ -2,11 +2,13 @@ namespace MathGame;
 
 public static class PlayerNameKeeper
 {
+    public static string playerName { get; set; } = "Player";
+
     public static string GetPlayerName() 
     {
         MinorExtensions.TypeWrite(GetNameAskPrompt());
 
-        string playerName = ReadUserInput();
+        playerName = ReadUserInput();
         
         GetPlayerGreating(playerName);
 
