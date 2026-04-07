@@ -3,12 +3,12 @@ namespace MathGame.Menu;
 public class MenuPrinter
 {
     public static void Print() =>
-        DrawMenu(TextsHandler.menuText); // PrintMenu(TextsHandler.menuText); // Print the menu with a typewriting effect  
+        DrawMenu(TextConstants.menuText); // PrintMenu(TextsHandler.menuText); // Print the menu with a typewriting effect  
 
     public static void DrawMenu(string menuText)
     {
-        TextDisplayMethods.PrintSeparator();
-        MinorExtensions.TypeWriteLine("Choose operation for challenge by entering the corresponding number:\n");
+        DisplayVisuals.PrintSeparator();
+        ConsoleExtensions.TypeWriteLine("Choose operation for challenge by entering the corresponding number:\n");
 
         // Split the menu text into lines, remove empty lines, and convert to an array for processing
         var menuLines = menuText

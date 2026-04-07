@@ -1,7 +1,7 @@
 namespace MathGame;
 
 // TEXT DISPLAY METHODS
-public static class TextDisplayMethods
+public static class DisplayVisuals
 {
     // =============================== SEPARATOR ===============================
     public static void PrintSeparator()
@@ -50,14 +50,14 @@ public static class TextDisplayMethods
     // =============================== INFORMATION MESSAGE ===============================
     public static void PrintInformationMessage(string infoText)
     {
-        int maxLength = TextsHandler.logoText.Split('\n').Max(l => l.Length);
-        var wrappedInfo = MinorExtensions.WrapText(infoText.Trim(), maxLength - 5); // Wrap the information text to fit within the console window, using the maximum line length from the welcome text minus some padding for better readability
+        int maxLength = TextConstants.logoText.Split('\n').Max(l => l.Length);
+        var wrappedInfo = ConsoleExtensions.WrapText(infoText.Trim(), maxLength - 5); // Wrap the information text to fit within the console window, using the maximum line length from the welcome text minus some padding for better readability
 
         foreach (var line in wrappedInfo)
         {
             int pad = (maxLength - line.Length) / 2;
             int totalPad = (Console.WindowWidth - maxLength) / 2 + pad;
-            MinorExtensions.TypeWriteLine(new string(' ', totalPad) + line); // Pad the line with spaces on the left to center it in the console window and print it with a typewriting effect
+            ConsoleExtensions.TypeWriteLine(new string(' ', totalPad) + line); // Pad the line with spaces on the left to center it in the console window and print it with a typewriting effect
         }
         Console.WriteLine();  
     }
@@ -66,6 +66,6 @@ public static class TextDisplayMethods
     public static void PrintAuthorSignature(string signatureText)
     {
         int signaturePad = (Console.WindowWidth - signatureText.Length) / 2;
-        MinorExtensions.TypeWriteLine(new string(' ', signaturePad) + signatureText);
+        ConsoleExtensions.TypeWriteLine(new string(' ', signaturePad) + signatureText);
     }
 }

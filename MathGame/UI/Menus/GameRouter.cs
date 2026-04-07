@@ -4,7 +4,7 @@ using MathGame.Menu;
 
 namespace MathGame;
 
-public static class GamesRouter
+public static class GameRouter
 {
     private static readonly GameSession _gameSession = new();
 
@@ -17,8 +17,8 @@ public static class GamesRouter
         var (score, time) = _gameSession.Start(menuChoice, difficulty, gameDescription);
 
         // Persistent storage of the game outcome
-        GamesHistoryIO.SaveGame(
-            PlayerNameKeeper.playerName, 
+        HistoryService.SaveGame(
+            PlayerProfile.playerName, 
             GamesNamesList.Games[menuChoice - 1], 
             difficulty, 
             score, 
@@ -29,11 +29,11 @@ public static class GamesRouter
     // Maps the numeric menu choice to the corresponding game description text
     private static string GetDescription(int choice) => choice switch 
     {
-        1 => TextsHandler.additionDescription,
-        2 => TextsHandler.subtractionDescription,
-        3 => TextsHandler.multiplicationDescription,
-        4 => TextsHandler.divisionDescription,
-        5 => TextsHandler.randomOperationsDescription,
+        1 => TextConstants.additionDescription,
+        2 => TextConstants.subtractionDescription,
+        3 => TextConstants.multiplicationDescription,
+        4 => TextConstants.divisionDescription,
+        5 => TextConstants.randomOperationsDescription,
         _ => string.Empty
     };
 }

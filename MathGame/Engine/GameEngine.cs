@@ -7,12 +7,12 @@ public static class GameEngine
     public static bool IsRunning { get; set; } = true;
     public static void Run()
     {
-        PlayerNameKeeper.GetPlayerName(); // Get the player's name 
+        PlayerProfile.GetPlayerName(); // Get the player's name 
 
         while (IsRunning)
         {
             MenuPrinter.Print(); // Print the menu
-            PlayerChoiceRouter.Run(PlayerMenuChoiseKeeper.GetPlayerMenuChoice()); // Get the player's menu choice
+            MainMenuRouter.Run(MenuInputHandler.GetChoice()); // Get the player's menu choice
         }
 
     }

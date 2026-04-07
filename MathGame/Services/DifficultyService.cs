@@ -1,17 +1,14 @@
-using System.IO.Pipelines;
-using MathGame.Menu;
-
 namespace MathGame;
 
-public static class DifficultySelector
+public static class DifficultyService
 {
     public static int SelectDifficulty(string gameName)
     {   
-        MinorExtensions.TypeWrite(GetDifficultyPrompt(gameName));
+        ConsoleExtensions.TypeWrite(GetDifficultyPrompt(gameName));
 
         int result = ValidateDifficulty(ReadUserInput());
 
-        MinorExtensions.TypeWrite(GetDifficultyPromptResult(result));
+        ConsoleExtensions.TypeWrite(GetDifficultyPromptResult(result));
 
         return result;
     }

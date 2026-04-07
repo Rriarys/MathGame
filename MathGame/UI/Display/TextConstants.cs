@@ -1,6 +1,6 @@
 namespace MathGame;
 
-public static class TextsHandler
+public static class TextConstants
 {
     public const string logoText = @"
  __  __       _   _        ____                      

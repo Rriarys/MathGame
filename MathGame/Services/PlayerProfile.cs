@@ -1,12 +1,12 @@
 namespace MathGame;
 
-public static class PlayerNameKeeper
+public static class PlayerProfile
 {
     public static string playerName { get; set; } = "Player";
 
     public static string GetPlayerName() 
     {
-        MinorExtensions.TypeWrite(GetNameAskPrompt());
+        ConsoleExtensions.TypeWrite(GetNameAskPrompt());
 
         playerName = ReadUserInput();
         
@@ -21,6 +21,6 @@ public static class PlayerNameKeeper
          Console.ReadLine()?.Trim() ?? "Player"; // If the user doesn't enter a name, default to "Player"
 
     public static void GetPlayerGreating(string playerName) =>
-        MinorExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!");
+        ConsoleExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!");
 
 }
