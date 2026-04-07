@@ -12,11 +12,13 @@ public static class HistoryService
     {
         if (!GamesHistoryData.History.Any())
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nNo games played yet.");
             return; 
         }
 
         DisplayVisuals.PrintSmallSeparator();
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         ConsoleExtensions.TypeWriteLine("\nGames History:\n\n");
 
         // Header

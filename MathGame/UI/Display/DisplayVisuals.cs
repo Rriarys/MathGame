@@ -25,8 +25,11 @@ public static class DisplayVisuals
     public static void AppWelcomePreamble(string logoText, string infoText, string signatureText)
     {
         Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
         PrintWelcomeMessage(logoText);
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
         PrintInformationMessage(infoText);
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         PrintAuthorSignature(signatureText);
     }
 

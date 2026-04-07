@@ -8,6 +8,7 @@ public class MenuPrinter
     public static void DrawMenu(string menuText)
     {
         DisplayVisuals.PrintSeparator();
+        Console.ForegroundColor = ConsoleColor.Cyan;
         ConsoleExtensions.TypeWriteLine("Choose operation for challenge by entering the corresponding number:\n");
 
         // Split the menu text into lines, remove empty lines, and convert to an array for processing
@@ -26,11 +27,9 @@ public class MenuPrinter
         if (leftPad < 0) leftPad = 0;
 
         Console.ForegroundColor = ConsoleColor.Blue;
-
         // Top border of the menu box
         Console.WriteLine(new string(' ', leftPad) +
             "╔" + new string('═', contentWidth) + "╗");
-
         // Menu lines with padding and side borders
         foreach (var line in menuLines)
         {
@@ -39,7 +38,6 @@ public class MenuPrinter
             Console.WriteLine(new string(' ', leftPad) +
                 "║" + padded + "║");
         }
-
         // Bottom border of the menu box
         Console.WriteLine(new string(' ', leftPad) +
             "╚" + new string('═', contentWidth) + "╝");

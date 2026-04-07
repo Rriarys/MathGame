@@ -32,22 +32,22 @@ Calculate the sum of two numbers.
 ";
     public const string subtractionDescription = @"
 Welcome to the Subtraction Game!
-Calculate the difference between two numbers.
+(calculate the difference between two numbers)
 
 ";
     public const string multiplicationDescription = @"
 Welcome to the Multiplication Game!
-Calculate the product of two numbers.
+(calculate the product of two numbers)
 
 ";
     public const string divisionDescription = @"
 Welcome to the Division Game!
-Calculate the quotient of two numbers.
+(calculate the quotient of two numbers)
 
 ";
     public const string randomOperationsDescription = @"
 Welcome to the Random Operations Game!
-Mix of all operations.
+(mix of all operations)
 
 ";
 }

@@ -11,6 +11,7 @@ public static class SystemRouter
             case 8:
                 DisplayVisuals.PrintSeparator();
                 ConsoleExtensions.PlayerNameChangingLoadingAnimation();
+                DisplayVisuals.PrintSeparator();
                 PlayerProfile.GetPlayerName();
                 break; 
 
@@ -21,6 +22,8 @@ public static class SystemRouter
                 break;
 
             case 0:
+                DisplayVisuals.PrintSmallSeparator();
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 ConsoleExtensions.TypeWriteLine($"\nThank you, {PlayerProfile.playerName}, for playing the Math Game! Goodbye!");
                 Thread.Sleep(2000);
                 GameEngine.IsRunning = false; // Exit the program

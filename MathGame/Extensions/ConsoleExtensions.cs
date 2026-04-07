@@ -59,7 +59,8 @@ public static class ConsoleExtensions
         Console.SetCursorPosition(0, Console.CursorTop);
         string[] spinner = { "|", "/", "-", "\\" };
         for (int i = 0; i < 40; i++)
-        {
+        {   
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write($"\rLoading story of games... {spinner[i % spinner.Length]}");
             Thread.Sleep(120);
         }
@@ -75,6 +76,7 @@ public static class ConsoleExtensions
         string[] spinner = { "|", "/", "-", "\\" };
         for (int i = 0; i < 40; i++)
         {   
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write($"\rChanging player session... {spinner[i % spinner.Length]}");
             Thread.Sleep(100);
         }

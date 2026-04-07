@@ -18,23 +18,27 @@ public class GameSession
         for (int i = 0; i < 5; i++)
         {
             var question = _questionFactory.GenerateQuestion(gameType, difficulty);
+            Console.ForegroundColor = ConsoleColor.White;
             ConsoleExtensions.TypeWriteLine($"Question {i + 1}: {question.firstNum} {question.symbol} {question.secondNum} = ?");
 
             int userAnswer = GetValidInput();
 
             if (userAnswer == question.answer)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 ConsoleExtensions.TypeWriteLine("\nCorrect!");
                 currentScore++;
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 ConsoleExtensions.TypeWriteLine($"\nWrong! The correct answer was: {question.answer}");
             }
             DisplayVisuals.PrintSmallSeparator();
         }
 
         gameTimer.Stop();
+        Console.ForegroundColor = ConsoleColor.Magenta;
         ConsoleExtensions.TypeWrite($"Game Over! Score: {currentScore}/5. Time: {gameTimer.Elapsed:m'm 's's 'fff'ms'}\n");
 
         return (currentScore, gameTimer.Elapsed);
@@ -45,12 +49,14 @@ public class GameSession
     {
         while (true)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             ConsoleExtensions.TypeWrite("\nYour answer: ");
             string? inputString = Console.ReadLine()?.Trim();
             
             if (int.TryParse(inputString, out int numericValue)) 
                 return numericValue;
-                
+            
+            Console.ForegroundColor = ConsoleColor.Yellow;
             ConsoleExtensions.TypeWrite("\nInvalid input. Please enter a numerical integer:\n");
         }
     }

@@ -13,6 +13,9 @@ public class MainMenuRouter
         else if (playerMenuChoice is 0 or 8 or 9)
             SystemRouter.Run(playerMenuChoice);
         else
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow; 
             ConsoleExtensions.TypeWriteLine("\nInvalid choice. Please try again.\n");
+        }
     }
 }

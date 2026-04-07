@@ -14,13 +14,20 @@ public static class PlayerProfile
 
         return playerName;
     }
-    public static string GetNameAskPrompt() =>
-        "Please enter your name: ";
+    public static string GetNameAskPrompt()
+    {   
+        Console.ForegroundColor = ConsoleColor.White;
+        return "Please enter your name: ";
+    }
 
     public static string ReadUserInput() => 
          Console.ReadLine()?.Trim() ?? "Player"; // If the user doesn't enter a name, default to "Player"
 
-    public static void GetPlayerGreating(string playerName) =>
+    public static void GetPlayerGreating(string playerName)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
         ConsoleExtensions.TypeWriteLine($"\nHello, {playerName}! Let's play the Math Game!");
+    }
+
 
 }

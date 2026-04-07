@@ -5,7 +5,8 @@ public static class MenuInputHandler
     public static int GetChoice()
     {
         while (true)
-        {
+        {   
+            Console.ForegroundColor = ConsoleColor.White;
             ConsoleExtensions.TypeWrite("\nEnter your choice: ");
             
             if (int.TryParse(Console.ReadLine(), out int input))
@@ -16,6 +17,7 @@ public static class MenuInputHandler
                 }
             }
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             ConsoleExtensions.TypeWriteLine("\nInvalid choice. Please try again.");
         }
     }
