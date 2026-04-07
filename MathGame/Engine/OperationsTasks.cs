@@ -36,10 +36,7 @@ Mix of all operations.
         int score = 0;
         Random random = new();
 
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.Magenta;
         MinorExtensions.TypeWrite(description);
-        Console.ResetColor();
 
         var stopwatch = Stopwatch.StartNew(); // Start the stopwatch to measure the elapsed time for the game session
 
@@ -47,25 +44,18 @@ Mix of all operations.
         {
             var (num1, num2, symbol, correctAnswer) = questionGenerator(random, difficulty); // Difficulty parameter is passed to the question generator function, allowing it to create questions that are appropriate for the selected difficulty level
 
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
             MinorExtensions.TypeWriteLine($"Question {i + 1}: {num1} {symbol} {num2} = ?"); // Print the question to the console with a typewriting effect, using the generated numbers and operation symbol to create the question format
-            Console.ResetColor();
 
             int userAnswer;
 
             while (true)
             {
-                Console.BackgroundColor = ConsoleColor.Black;
                 MinorExtensions.TypeWrite("\nYour answer: ");
                 string? userInput = Console.ReadLine()?.Trim();
 
                 if (userInput is null || !int.TryParse(userInput, out userAnswer))
                 {
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.Yellow;
                     MinorExtensions.TypeWrite("\nInvalid input. Please enter a valid integer answer:\n");
-                    Console.ResetColor();
                     continue;
                 }
 
@@ -74,27 +64,18 @@ Mix of all operations.
 
             if (userAnswer == correctAnswer)
             {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.Green;
                 MinorExtensions.TypeWriteLine("\nCorrect!");
-                Console.ResetColor();
                 TextDisplayMethods.PrintSmallSeparator();
                 score++;
             }
             else
             {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.Red;
                 MinorExtensions.TypeWriteLine($"\nWrong! The correct answer was: {correctAnswer}");
-                Console.ResetColor();
                 TextDisplayMethods.PrintSmallSeparator();
             }
         }
         stopwatch.Stop(); // Stop the stopwatch after the game session is completed
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.DarkBlue;
         MinorExtensions.TypeWrite($"Game Over! Your final score is: {score}/5. Time elapsed: {stopwatch.Elapsed.TotalSeconds:F2} seconds.\n");
-        Console.ResetColor();
 
         return (score, stopwatch.Elapsed.TotalSeconds);
     }

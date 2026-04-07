@@ -2,15 +2,25 @@ namespace MathGame;
 
 public static class PlayerMenuChoiseKeeper
 {
-    public static string? GetPlayerMenuChoice()
+    public static int GetPlayerMenuChoice()
     {
-        MinorExtensions.TypeWrite(GetNameAskPrompt());
+        while (true)
+        {
+            MinorExtensions.TypeWrite(GetNameAskPrompt());
+            
+            int? input = ReadUserInput();
 
-        return ReadUserInput();
+            if (input is >= 0 and <= 9 and not (6 or 7))
+            {
+                return input.Value;
+            }
+
+            MinorExtensions.TypeWriteLine("\nInvalid choice. Please try again.");
+        }
     }
 
     public static string GetNameAskPrompt() =>
         "\nEnter your choice: ";
-    public static string? ReadUserInput() => 
-         Console.ReadLine()?.Trim();
+    public static int? ReadUserInput() => 
+      int.TryParse(Console.ReadLine(), out var result) ? result : null;
 }
