@@ -1,15 +1,14 @@
 namespace MathGame;
 
 // This class is only for storing minor extension methods that may be used across the project, to make the code cleaner and more organized. It can be expanded in the future as needed.
-public static class MinorExtensions
+public static class ConsoleExtensions
 {
 
     // Method to cut a string to a specified maximum length
     public static string Cut(this string value, int maxLength)
     {
-        return value.Length <= maxLength 
-            ? value 
-            : value.Substring(0, maxLength);
+        if (value.Length <= maxLength) return value;
+        return value.Substring(0, maxLength - 3) + "...";
     }
 
     // CUSTOM TYPEWRITING METHODS
@@ -60,7 +59,8 @@ public static class MinorExtensions
         Console.SetCursorPosition(0, Console.CursorTop);
         string[] spinner = { "|", "/", "-", "\\" };
         for (int i = 0; i < 40; i++)
-        {
+        {   
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write($"\rLoading story of games... {spinner[i % spinner.Length]}");
             Thread.Sleep(120);
         }
@@ -76,6 +76,7 @@ public static class MinorExtensions
         string[] spinner = { "|", "/", "-", "\\" };
         for (int i = 0; i < 40; i++)
         {   
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write($"\rChanging player session... {spinner[i % spinner.Length]}");
             Thread.Sleep(100);
         }
