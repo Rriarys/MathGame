@@ -10,6 +10,7 @@ Console.Clear();
 
 try
 {
+    TextDisplayMethods.AppWelcomePreamble(TextsHandler.welcomeText, TextsHandler.infoText, TextsHandler.signatureText);
     GameEngine.Run();
 }   
 finally
