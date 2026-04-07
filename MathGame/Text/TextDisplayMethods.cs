@@ -21,10 +21,10 @@ public static class TextDisplayMethods
         Console.WriteLine();
     }
 
-    public static void AppWelcomePreamble(string welcomeText, string infoText, string signatureText)
+    public static void AppWelcomePreamble(string logoText, string infoText, string signatureText)
     {
         Console.Clear();
-        PrintWelcomeMessage(welcomeText);
+        PrintWelcomeMessage(logoText);
         PrintInformationMessage(infoText);
         PrintAuthorSignature(signatureText);
     }
@@ -49,7 +49,7 @@ public static class TextDisplayMethods
     // =============================== INFORMATION MESSAGE ===============================
     public static void PrintInformationMessage(string infoText)
     {
-        int maxLength = TextsHandler.welcomeText.Split('\n').Max(l => l.Length);
+        int maxLength = TextsHandler.logoText.Split('\n').Max(l => l.Length);
         var wrappedInfo = MinorExtensions.WrapText(infoText.Trim(), maxLength - 5); // Wrap the information text to fit within the console window, using the maximum line length from the welcome text minus some padding for better readability
 
         foreach (var line in wrappedInfo)

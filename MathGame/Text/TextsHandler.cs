@@ -2,7 +2,7 @@ namespace MathGame;
 
 public static class TextsHandler
 {
-public const string welcomeText = @"
+public const string logoText = @"
  __  __       _   _        ____                      
 |  \/  | __ _| |_| |__    / ___| __ _ _ __ ___   ___ 
 | |\/| |/ _` | __| '_ \  | |  _ / _` | '_ ` _ \ / _ \
