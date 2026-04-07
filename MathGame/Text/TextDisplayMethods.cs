@@ -21,6 +21,7 @@ public static class TextDisplayMethods
         Console.WriteLine();
     }
 
+    // =============================== APP WELCOME PREAMBLE ===============================
     public static void AppWelcomePreamble(string logoText, string infoText, string signatureText)
     {
         Console.Clear();
@@ -67,47 +68,4 @@ public static class TextDisplayMethods
         int signaturePad = (Console.WindowWidth - signatureText.Length) / 2;
         MinorExtensions.TypeWriteLine(new string(' ', signaturePad) + signatureText);
     }
-
-    // =============================== MENU DISPLAY ===============================
-    public static void PrintMenu(string menuText)
-    {
-        PrintSeparator();
-        MinorExtensions.TypeWriteLine("Choose operation for challenge by entering the corresponding number:\n");
-
-        // Split the menu text into lines, remove empty lines, and convert to an array for processing
-        var menuLines = menuText
-            .Split('\n')
-            .Where(l => !string.IsNullOrWhiteSpace(l))
-            .ToArray();
-
-        int maxLengthMenu = menuLines.Max(l => l.Length);
-
-        // Calculate the total width of the menu box, including padding and borders
-        int contentWidth = maxLengthMenu + 2;
-        int totalWidth = contentWidth + 2;
-
-        int leftPad = (Console.WindowWidth - totalWidth) / 2; // Calculate the left padding to center the menu box in the console window
-        if (leftPad < 0) leftPad = 0;
-
-        Console.ForegroundColor = ConsoleColor.Blue;
-
-        // Top border of the menu box
-        Console.WriteLine(new string(' ', leftPad) +
-            "╔" + new string('═', contentWidth) + "╗");
-
-        // Menu lines with padding and side borders
-        foreach (var line in menuLines)
-        {
-            string padded = " " + line.PadRight(maxLengthMenu) + " ";
-
-            Console.WriteLine(new string(' ', leftPad) +
-                "║" + padded + "║");
-        }
-
-        // Bottom border of the menu box
-        Console.WriteLine(new string(' ', leftPad) +
-            "╚" + new string('═', contentWidth) + "╝");
-        Console.ResetColor();
-    }
-
 }

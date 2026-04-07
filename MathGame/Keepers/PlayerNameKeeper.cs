@@ -1,6 +1,6 @@
 namespace MathGame;
 
-public static class NameKeeper
+public static class PlayerNameKeeper
 {
     public static string GetPlayerName() 
     {
