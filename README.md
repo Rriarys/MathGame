@@ -72,7 +72,7 @@ dotnet test
 
 ### 📦 DOWNLOAD EXECUTABLES
 
-Ready-to-run binaries for **Windows** and **Linux** are available in the [Releases](https://github.com/Rriarys/MathGame/releases) section. These are self-contained and do not require a pre-installed .NET runtime.
+Ready-to-run binaries for **Windows** and **Linux** are available in the [**Releases**](https://github.com/Rriarys/MathGame/releases) section. These are self-contained and do not require a pre-installed .NET runtime.
 
 **Also available on itch.io:** 🚀 [**rriarys.itch.io/mathgame**](https://rriarys.itch.io/mathgame)
 
