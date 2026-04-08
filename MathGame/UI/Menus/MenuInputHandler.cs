@@ -11,7 +11,7 @@ public static class MenuInputHandler
             
             if (int.TryParse(Console.ReadLine(), out int input))
             {
-                if (input is >= 0 and <= 9 and not (6 or 7))
+                if (input is >= 0 and <= 9 and not (6 or 7)) // 6 and 7 keys at keyboard dont have any options
                 {
                     return input;
                 }

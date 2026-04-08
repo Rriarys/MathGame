@@ -21,7 +21,7 @@ public static class PlayerProfile
     }
 
     public static string ReadUserInput() => 
-         Console.ReadLine()?.Trim() ?? "Player"; // If the user doesn't enter a name, default to "Player"
+         Console.ReadLine()?.Trim() ?? "Guest"; // If the user doesn't enter a name, default to "Guest"
 
     public static void GetPlayerGreating(string playerName)
     {

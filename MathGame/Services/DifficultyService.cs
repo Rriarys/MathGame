@@ -25,7 +25,7 @@ public static class DifficultyService
     {
         Console.ForegroundColor = ConsoleColor.White;
         ConsoleExtensions.TypeWrite("Enter difficulty (1-3): ");
-        return int.TryParse(Console.ReadLine(), out var result) ? result : 0;
+        return int.TryParse(Console.ReadLine(), out var result) ? result : 0; // Only integers are allowed
     }
 
     public static int ValidateDifficulty(int userInput) =>

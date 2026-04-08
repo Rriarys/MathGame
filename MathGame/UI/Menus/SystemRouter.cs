@@ -12,13 +12,13 @@ public static class SystemRouter
                 DisplayVisuals.PrintSeparator();
                 ConsoleExtensions.PlayerNameChangingLoadingAnimation();
                 DisplayVisuals.PrintSeparator();
-                PlayerProfile.GetPlayerName();
+                PlayerProfile.GetPlayerName(); // Get the player's name after the Engine restart
                 break; 
 
             case 9:
                 DisplayVisuals.PrintSeparator();
                 ConsoleExtensions.StoryShowLoadingAnimation();
-                HistoryService.LoadHistory();
+                HistoryService.LoadHistory(); // Load the game history
                 break;
 
             case 0:
