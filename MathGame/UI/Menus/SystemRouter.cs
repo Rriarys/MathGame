@@ -23,7 +23,7 @@ public static class SystemRouter
 
             case 0:
                 DisplayVisuals.PrintSmallSeparator();
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 ConsoleExtensions.TypeWriteLine($"\nThank you, {PlayerProfile.playerName}, for playing the Math Game! Goodbye!");
                 Thread.Sleep(2000);
                 GameEngine.IsRunning = false; // Exit the program

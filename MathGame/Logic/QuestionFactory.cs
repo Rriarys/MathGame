@@ -8,10 +8,10 @@ public class QuestionFactory
     public (int firstNum, int secondNum, string symbol, int answer) GenerateQuestion(int gameType, int difficulty)
     {
         // For Random mode (5), pick an operation between 1 (Add) and 4 (Divide)
-        int effectiveType = gameType == 5 ? _randomGenerator.Next(1, 5) : gameType;
+        int operationType = gameType == 5 ? _randomGenerator.Next(1, 5) : gameType;
         int maxRange = MathOperations.GetDifficultyLimit(difficulty, 20, 50, 100);
 
-        return effectiveType switch
+        return operationType switch
         {
             1 => MathOperations.CreateAddition(_randomGenerator.Next(1, maxRange + 1), _randomGenerator.Next(1, maxRange + 1)),
             2 => MathOperations.CreateSubtraction(_randomGenerator.Next(1, maxRange + 1), _randomGenerator.Next(1, maxRange + 1)),
