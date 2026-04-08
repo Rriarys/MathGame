@@ -57,7 +57,7 @@ dotnet test
 
 1.  **Clone** the repository:
     ```bash
-    git clone [https://github.com/Rriarys/MathGame.git](https://github.com/Rriarys/MathGame.git)
+    git clone https://github.com/Rriarys/MathGame.git
     ```
 2.  **Navigate** to the project folder:
     ```bash
