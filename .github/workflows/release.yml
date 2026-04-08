@@ -1,47 +1,84 @@
+# Name of the workflow as it appears in the GitHub Actions tab
 name: Build and Release MathGame
 
 on:
   push:
+    # This workflow triggers ONLY when you push a git tag starting with 'v' (e.g., v1.0.2)
     tags:
-      - 'v*' # Trigger on tags starting with 'v', e.g., v1.0.0
+      - 'v*' 
 
 permissions:
-  contents: write # Allow the workflow to create releases and upload assets
+  # Granting 'write' permission is mandatory to allow the bot to create a Release and upload files
+  contents: write
 
 jobs:
   release:
+    # We use a clean Ubuntu virtual machine to perform the build
     runs-on: ubuntu-latest
+    
     strategy:
       matrix:
-        # Build for Windows and Linux (64-bit)
+        # The 'matrix' allows us to run the same steps for different targets simultaneously
+        # Here we create two parallel jobs: one for Windows and one for Linux
         target: [win-x64, linux-x64]
 
     steps:
+      # Step 1: Clone the source code from the repository onto the virtual machine
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Step 2: Install the .NET 10 SDK needed to compile the C# project
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x' # Using .NET 10 SDK
+          dotnet-version: '10.0.x'
 
+      # Step 3: Run all 25 tests. If any test fails, the process stops here (the release won't be created)
+      - name: Run Unit Tests
+        run: dotnet test --configuration Release --verbosity normal
+
+      # Step 4: Convert source code into a ready-to-run application
+      # -c Release: Optimizes the code for performance
+      # -r: Specifies the target Operating System (Windows or Linux)
+      # --self-contained true: Includes the .NET runtime so the user doesn't need to install .NET
+      # -p:PublishSingleFile=true: Merges everything into one single .exe or binary file
+      # -p:PublishTrimmed=true: Removes unused code to make the file size much smaller
+      # -p:DebugType=None: Prevents the creation of .pdb (debug) files to keep the output clean
+      # -o: Sets the output folder path
       - name: Publish
-        # Create a self-contained, single-file executable, trimming unused code
         run: |
-          dotnet publish MathGame/MathGame.csproj -c Release -r ${{ matrix.target }} --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish/${{ matrix.target }}
+          dotnet publish MathGame/MathGame.csproj \
+            -c Release \
+            -r ${{ matrix.target }} \
+            --self-contained true \
+            -p:PublishSingleFile=true \
+            -p:PublishTrimmed=true \
+            -p:DebugType=None \
+            -o ./publish/${{ matrix.target }}
 
-      - name: Zip Artifacts
-        # Pack the output into zip archives for easy downloading
+      # Step 5 (Windows only): Create a standard .zip archive for Windows users
+      - name: Pack Artifacts (Windows)
+        if: matrix.target == 'win-x64'
         run: |
           cd ./publish/${{ matrix.target }}
           zip -r ../../${{ matrix.target }}.zip .
 
+      # Step 6 (Linux only): Create a .tar.gz archive (the standard for Linux)
+      # tar -czvf: c=create, z=gzip (compress), v=verbose, f=file
+      - name: Pack Artifacts (Linux)
+        if: matrix.target == 'linux-x64'
+        run: |
+          cd ./publish/${{ matrix.target }}
+          tar -czvf ../../${{ matrix.target }}.tar.gz .
+
+      # Step 7: Upload the generated archives to the GitHub Release page
+      # It will automatically attach the files to the tag that triggered the workflow
       - name: Create GitHub Release
-        # Create a new Release entry and attach the zipped binaries
         uses: softprops/action-gh-release@v2
         with:
           files: |
             win-x64.zip
-            linux-x64.zip
+            linux-x64.tar.gz
         env:
+          # A special secret token provided by GitHub to authorize the release creation
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
