@@ -39,7 +39,7 @@ public static class ConsoleExtensions
     public static void TypeWrite(string text, int delay = 15)
     {   
         Console.CursorVisible = false;
-    foreach (char c in text)
+        foreach (char c in text)
         {
             if (c == '\n')
             {

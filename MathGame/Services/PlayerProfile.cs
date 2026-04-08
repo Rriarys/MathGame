@@ -20,9 +20,11 @@ public static class PlayerProfile
         return "Please enter your name: ";
     }
 
-    public static string ReadUserInput() => 
-         Console.ReadLine()?.Trim() ?? "Guest"; // If the user doesn't enter a name, default to "Guest"
-
+    public static string ReadUserInput() 
+    {
+        string? input = Console.ReadLine();
+        return string.IsNullOrWhiteSpace(input) ? "Guest" : input.Trim(); // If the user doesn't enter a name, default to "Guest"
+    } 
     public static void GetPlayerGreating(string playerName)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
