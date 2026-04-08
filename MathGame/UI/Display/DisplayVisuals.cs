@@ -24,7 +24,6 @@ public static class DisplayVisuals
     // APP WELCOME PREAMBLE (container method for the other welcome methods)
     public static void AppWelcomePreamble(string logoText, string infoText, string signatureText)
     {
-        Console.Clear();
         Console.ForegroundColor = ConsoleColor.Cyan;
         PrintWelcomeMessage(logoText);
         Console.ForegroundColor = ConsoleColor.DarkCyan;
