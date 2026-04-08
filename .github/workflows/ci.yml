@@ -1,0 +1,44 @@
+# Name of the workflow that will be displayed in the GitHub Actions interface
+name: Build and Test MathGame
+
+on:
+  # Trigger the workflow every time code is pushed to the 'main' branch
+  push:
+    branches: [ main ]
+  # Also trigger the workflow when someone opens a Pull Request targeting the 'main' branch
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  # For security, we only grant 'read' access to the repository contents
+  # This is enough to download the code and run tests without risking unauthorized changes
+  contents: read
+
+jobs:
+  test:
+    # We use the latest stable Ubuntu environment provided by GitHub to run our tasks
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Clone the repository's code onto the GitHub runner (the virtual machine)
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Install the .NET 10 Software Development Kit (SDK)
+      # This provides the 'dotnet' command-line tools needed to build and test the project
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # Step 3: Download all necessary external libraries (NuGet packages) like xUnit
+      # This is based on the project file (.csproj) requirements
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Step 4: Execute all unit tests in the solution
+      # --no-restore: Skips the restore step because we already did it in Step 3 (saves time)
+      # --configuration Release: Runs tests against the optimized version of the code
+      # --verbosity normal: Provides enough detail in the logs to see which tests passed or failed
+      - name: Run Unit Tests
+        run: dotnet test --no-restore --configuration Release --verbosity normal
