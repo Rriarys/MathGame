@@ -1,4 +1,4 @@
-namespace MathGame.Engine;
+namespace MathGame;
 
 public class QuestionFactory
 {
