@@ -26,6 +26,9 @@ This project implements professional software quality standards:
 To run tests locally:
 ```bash
 dotnet test
+```
+
+
 
 ---
 
