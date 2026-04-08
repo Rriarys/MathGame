@@ -4,13 +4,13 @@ public class MainMenuRouter
 {
     public static void Run(int playerMenuChoice)
     {
-        if (playerMenuChoice is >=1 and <= 5)
+        if (playerMenuChoice is >=1 and <= 5) // Games
         {
             DisplayVisuals.PrintSeparator();
             GameRouter.Run(playerMenuChoice, DifficultyService.SelectDifficulty(GamesNamesList.Games[playerMenuChoice - 1])); // List starts from 0 
         }
 
-        else if (playerMenuChoice is 0 or 8 or 9)
+        else if (playerMenuChoice is 0 or 8 or 9) // Name change, History, Exit
             SystemRouter.Run(playerMenuChoice);
         else
         {

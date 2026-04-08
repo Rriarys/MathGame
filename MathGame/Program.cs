@@ -12,7 +12,7 @@ try
     // Text messages to be displayed (Game logo, information text, and author signature), only once at the beginning)
     DisplayVisuals.AppWelcomePreamble(TextConstants.logoText, TextConstants.infoText, TextConstants.signatureText);
     DisplayVisuals.PrintSeparator(); // Print a separator line to visually separate different sections of the console output
-    GameEngine.Run();
+    GameEngine.Run(); // Start the game
 }   
 finally
 {

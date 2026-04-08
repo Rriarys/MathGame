@@ -9,7 +9,7 @@ public static class MathOperations
             1 => easy,
             2 => medium,
             3 => hard,
-            _ => medium // Default fallback to medium difficulty
+            _ => medium
         };
 
     // Standard arithmetic tasks returning a tuple with operands, symbol, and result

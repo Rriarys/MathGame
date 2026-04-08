@@ -12,7 +12,7 @@ public static class DisplayVisuals
         Console.WriteLine();
     }
 
-    // =============================== SMALL SEPARATOR ===============================
+    // ------------------------------ SMALL SEPARATOR ------------------------------
     public static void PrintSmallSeparator()
     {   
         Console.WriteLine();
@@ -21,7 +21,7 @@ public static class DisplayVisuals
         Console.WriteLine();
     }
 
-    // =============================== APP WELCOME PREAMBLE ===============================
+    // APP WELCOME PREAMBLE (container method for the other welcome methods)
     public static void AppWelcomePreamble(string logoText, string infoText, string signatureText)
     {
         Console.Clear();
@@ -33,7 +33,7 @@ public static class DisplayVisuals
         PrintAuthorSignature(signatureText);
     }
 
-    // =============================== WELCOME MESSAGE ===============================
+    // WELCOME MESSAGE
     public static void PrintWelcomeMessage(string welcomeText)
     {   
         var welcomeLines = welcomeText // Split the welcome text into lines, remove empty lines, and convert to an array for processing
@@ -50,7 +50,7 @@ public static class DisplayVisuals
         Console.WriteLine();
     }
 
-    // =============================== INFORMATION MESSAGE ===============================
+    // INFORMATION MESSAGE
     public static void PrintInformationMessage(string infoText)
     {
         int maxLength = TextConstants.logoText.Split('\n').Max(l => l.Length);
@@ -65,7 +65,7 @@ public static class DisplayVisuals
         Console.WriteLine();  
     }
 
-    // =============================== AUTHOR SIGNATURE ===============================
+    // AUTHOR SIGNATURE
     public static void PrintAuthorSignature(string signatureText)
     {
         int signaturePad = (Console.WindowWidth - signatureText.Length) / 2;

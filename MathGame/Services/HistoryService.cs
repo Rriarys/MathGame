@@ -27,7 +27,6 @@ public static class HistoryService
 
         foreach (var game in GamesHistoryData.History)
         {
-            // Теперь обращаемся к свойствам через точку: game.PlayerName, game.Score и т.д.
             Console.WriteLine($"{game.PlayerName.Cut(15),-15} | {game.GameName.Cut(15),-15} | {game.Difficulty,-8} | {game.Score + "/5",-7} | {game.Time,-15}");
         }
     }
